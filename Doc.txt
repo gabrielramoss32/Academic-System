@@ -1,0 +1,13 @@
+gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
+./sistema -> Rodar depois
+
+30/07/2026:
+- Adicionado main definido
+- Adicionado e estruturado headers de menu e cadastro de professor
+- Adicionado codigos de menu e cadastro do professor
+- Adicionado git ignore
+
+Para o proximo dia:
+- Adicionar verificação de cadastro na plataforma
+- Adicionar função de cadastrar turmas
+- Mais comentários no código
