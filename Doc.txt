@@ -7,7 +7,14 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - Adicionado codigos de menu e cadastro do professor
 - Adicionado git ignore
 
-Para o proximo dia:
-- Adicionar verificação de cadastro na plataforma
-- Adicionar função de cadastrar turmas
-- Mais comentários no código
+31/07/2026:
+- Struct de professor movido para o professor_cadastro.h
+- Melhorias visuais do menu
+- verificação de id
+- inicio do desenvolvimento da função de cadastrar turmas
+- comunicação entre a confirmação de cadastro do professor no menu e de cadastrar turmas
+
+para o proximo dia: 
+- resolver o bug da função (compile para testar)
+- dar merge no main apos resolver os bugs
+- iniciar o acesso das turmas e listagem

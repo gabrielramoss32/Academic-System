@@ -1,45 +1,57 @@
 #include<stdio.h>
 #include<windows.h>
 #include "professor_cadastro.h"
-
-typedef struct {
-    int id;
-    int idade;
-    char nome[100];
-    char formacao[50];
-    char disciplina[30];
-    char escola[100];
-} Professor; 
+#include "cadastro_turma.h"
  
 void cadastro_professor () {
     SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
     SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
 
     Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada
+    int opcao; //opcao do switch case de cadastrar turma ou sair
 
     printf("Insira seu ID: ");
     scanf("%d", &professor1.id);
+    while (professor1.id < 1000 || professor1.id > 9999)  { //verificação de digitos do ID
+        printf("Seu ID deve ter obrigatoriamente 4 dígitos, insira-o novamente: ");
+        scanf("%d", &professor1.id);
+    }
 
     printf("Digite sua idade: ");
     scanf("%d", &professor1.idade);
-    while (professor1.idade < 21) {
+    while (professor1.idade < 21) { //verificação de idade
         printf("Idade muito baixa, insira uma idade maior do que 20 anos: \n");
         scanf("%d", &professor1.idade);
     }
 
     printf("Digite o seu nome: ");
-    getchar();
+    getchar(); //come o enter do buffer
     fgets(professor1.nome, sizeof(professor1.nome), stdin);
 
     printf("Digite a sua formação: ");
     scanf("%s", professor1.formacao);
 
-    printf("Digite a disciplina que você ministra: ");
-    scanf("%s", professor1.disciplina);
-
     printf("Digite o nome da escola em que você é professor: ");
-    getchar();
+    getchar();  //come o enter do buffer
     fgets(professor1.escola, sizeof(professor1.escola), stdin);
 
-    printf("\nCadastro realizado! Seja bem-vindo %s", professor1.nome);
+    printf("\nCadastro realizado! Seja bem-vindo %s\n", professor1.nome);
+
+    professor1.cadastrado = true; //o sistema recebe a informação de que o professor se cadastrou
+
+    printf("- Selecione o que você deseja: ");
+    printf("[1] Cadastrar turma");
+    printf("[2] Sair");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+        case 1:
+            turma_cadastro(professor1.cadastrado);
+            break;
+        case 2:
+            printf("Obrigado pelo seu cadastro!");
+            break;
+        default:
+            printf("Opção inválida!");
+    }
 }

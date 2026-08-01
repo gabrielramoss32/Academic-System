@@ -2,6 +2,7 @@
 #include<windows.h>
 #include "menu.h" 
 #include "professor_cadastro.h"
+#include "cadastro_turma.h"
 
 void menu_inicial () {
     SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
@@ -9,10 +10,11 @@ void menu_inicial () {
 
     //Raiz do projeto: 1ª etapa a ser chamada
 
-    int opcao;
+    int opcao; //opcao inicial do switch case
+
     printf("┌───────SISTEMA ACADÊMICO───────┐\n");
-    printf("Selecione o que você deseja:\n");
-    printf("[1] Se cadastrar\n");
+    printf("\n- Selecione o que você deseja:\n");
+    printf("\n[1] Se cadastrar\n");
     printf("[2] Cadastrar turmas\n");
     printf("[3] Sair\n");
     printf("└───────────────────────────────┘\n");
@@ -23,11 +25,12 @@ void menu_inicial () {
             cadastro_professor();
             break;
         case 2:
+            turma_cadastro();
             break;
         case 3:
             printf("Obrigado por acessar o sistema!");
             break;
-        default:
+        default: //para numeros diferentes dos selecionados
             printf("Opção inválida!");
     }
 }
