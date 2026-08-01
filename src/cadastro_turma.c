@@ -15,10 +15,10 @@ void turma_cadastro (bool professor1_cadastrado) {
         printf("Você ainda não realizou o seu cadastro, realize ele para cadastrar as suas turmas.\n");
         menu_inicial();
     } else {
-        printf("Insira a série da turma: (6º, 7º, 8º)");
+        printf("Insira a série da turma (6º, 7º, 8º): ");
         scanf("%d", &turmas.serie);
 
-        printf("Digite a turma: (A, B, C)");
+        printf("Digite a turma (A, B, C): ");
         scanf(" %c", &turmas.turma);
 
         printf("Digite qual turno você ministra essa turma: ");

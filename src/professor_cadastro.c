@@ -2,7 +2,11 @@
 #include<windows.h>
 #include "professor_cadastro.h"
 #include "cadastro_turma.h"
- 
+
+Professor professor1 = {
+    .cadastrado = false //professor global definido como sem cadastro
+};
+
 void cadastro_professor () {
     SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
     SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
@@ -29,7 +33,8 @@ void cadastro_professor () {
     fgets(professor1.nome, sizeof(professor1.nome), stdin);
 
     printf("Digite a sua formação: ");
-    scanf("%s", professor1.formacao);
+    getchar(); //come o enter do buffer
+    fgets(professor1.formacao, sizeof(professor1.formacao), stdin);
 
     printf("Digite o nome da escola em que você é professor: ");
     getchar();  //come o enter do buffer
@@ -39,9 +44,9 @@ void cadastro_professor () {
 
     professor1.cadastrado = true; //o sistema recebe a informação de que o professor se cadastrou
 
-    printf("- Selecione o que você deseja: ");
-    printf("[1] Cadastrar turma");
-    printf("[2] Sair");
+    printf("- Selecione o que você deseja: \n");
+    printf("[1] Cadastrar turma\n");
+    printf("[2] Sair\n");
     scanf("%d", &opcao);
 
     switch (opcao) {
@@ -52,6 +57,6 @@ void cadastro_professor () {
             printf("Obrigado pelo seu cadastro!");
             break;
         default:
-            printf("Opção inválida!");
+            printf("Opção inválida, selecione uma opção existente e refaça o cadastro.");
     }
 }

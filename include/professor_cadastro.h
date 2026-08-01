@@ -11,6 +11,8 @@ typedef struct {
     bool cadastrado;
 } Professor; //struct com as informações do professor
 
+extern Professor professor1; //variavel global declarada para outros arquivos reconhecerem
+
 void cadastro_professor ();
 
 #endif
