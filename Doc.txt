@@ -14,10 +14,16 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - inicio do desenvolvimento da função de cadastrar turmas
 - comunicação entre a confirmação de cadastro do professor no menu e de cadastrar turmas
 
-para o proximo dia: 
-- resolver o bug da função (compile para testar)
-- dar merge no main apos resolver os bugs
-- iniciar o acesso das turmas e listagem
-
 01/08/2026:
 - bug de validação e chamar função arrumado
+
+02/08/2026:
+- Adicionado estrutura para gerenciamento das turmas em cadastro_turma.c
+- Adicionado função de cadastrar novas turmas
+
+Para a proxima demanda:
+- adicionar retorno em professor_cadastro.c no switch case
+- adicionar retorno no cadastro de novas turmas caso a quantidade exceda 10
+- desenvolver as demais funções restantes
+- dar merge no main
+- Melhorias visuais

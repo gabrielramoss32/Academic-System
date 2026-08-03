@@ -25,10 +25,10 @@ void menu_inicial () {
             cadastro_professor(); //FUNÇÃO PRONTA E TESTADA
             break;
         case 2:
-            turma_cadastro(professor1.cadastrado);
+            turma_cadastro(professor1.cadastrado); //FUNÇÃO PRONTA E TESTADA
             break;
         case 3:
-            printf("Obrigado por acessar o sistema!");
+            printf("Obrigado por acessar o sistema.");
             break;
         default: //para numeros diferentes dos selecionados
             printf("Opção inválida, selecione uma opção existente.\n");

@@ -7,11 +7,12 @@ Professor professor1 = {
     .cadastrado = false //professor global definido como sem cadastro
 };
 
+Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada
+
 void cadastro_professor () {
     SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
     SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
 
-    Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada
     int opcao; //opcao do switch case de cadastrar turma ou sair
 
     printf("Insira seu ID: ");
