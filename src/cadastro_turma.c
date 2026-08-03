@@ -7,7 +7,6 @@
 
 Turma turmas[MAX_TURMAS]; //Variável turmas, declarada pelo typedef da struct turma
 int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas;
-int contTurma = 0; //Variável para informar a quantidade de turmas cadastradas ao usuário
 
 void turma_cadastro (bool professor1_cadastrado) {
     SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
@@ -33,38 +32,43 @@ void turma_cadastro (bool professor1_cadastrado) {
         getchar(); //come o enter do buffer
         fgets(turmas[qtd_turmas].disciplina, sizeof(turmas[qtd_turmas].disciplina), stdin);
 
-        printf("\n- Turma nº %d/10 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
+        printf("\n- Turma nº %d/2 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
         qtd_turmas++; //Incrementação da quantidade de turma atual
 
-        printf("[1] Cadastrar nova turma\n");
-        printf("[2] Editar turma\n");
-        printf("[3] Acessar turma\n");
-        printf("[4] Excluir turma\n");
-        printf("[5] Sair\n");
-        scanf("%d", &opcao);
+        do {
+            printf("\n┌─────────────────────────────┐\n");
+            printf("[1] Cadastrar nova turma\n");
+            printf("[2] Editar turma\n");
+            printf("[3] Acessar turma\n");
+            printf("[4] Excluir turma\n");
+            printf("[5] Sair\n");
+            printf("└─────────────────────────────┘\n");
+            scanf("%d", &opcao);
 
-        switch (opcao) {
-            case 1:
-                if (qtd_turmas == 9) {
-                    printf("Quantidade de turmas excedida.");
-                } else {
-                    turma_cadastro(professor1.cadastrado);
-                }
-                break;
-            case 2:
+            switch (opcao) {
+                case 1:
+                    if (qtd_turmas == 2) {
+                        printf("Quantidade de turmas excedida, selecione uma opção existente.");
+                        opcao = 0;
+                    } else {
+                        turma_cadastro(professor1.cadastrado);
+                    }
+                    break;
+                case 2:
 
-                break;
-            case 3:
+                    break;
+                case 3:
 
-                break;
-            case 4:
+                    break;
+                case 4:
 
-                break;
-            case 5:
-                printf("Agradecemos pelo cadastro da turma.");
-                break;
-            default:
-                printf("Opção inválida.");
-        }
+                    break;
+                case 5:
+                    printf("Agradecemos pelo cadastro da turma.");
+                    break;
+                default:
+                    printf("Opção inválida, selecione uma opção existente: \n");
+                } 
+        } while (opcao > 5 || opcao < 1);
     }
 }

@@ -1,23 +1,23 @@
 gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 ./sistema -> Rodar depois
 
-30/07/2026:
+30/07/2026 (V 0.1):
 - Adicionado main definido
 - Adicionado e estruturado headers de menu e cadastro de professor
 - Adicionado codigos de menu e cadastro do professor
 - Adicionado git ignore
 
-31/07/2026:
+31/07/2026 (V 0.2):
 - Struct de professor movido para o professor_cadastro.h
 - Melhorias visuais do menu
 - verificação de id
 - inicio do desenvolvimento da função de cadastrar turmas
 - comunicação entre a confirmação de cadastro do professor no menu e de cadastrar turmas
 
-01/08/2026:
+01/08/2026 (V 0.3):
 - bug de validação e chamar função arrumado
 
-02/08/2026:
+02/08/2026 (V 0.4):
 - Adicionado estrutura para gerenciamento das turmas em cadastro_turma.c
 - Adicionado função de cadastrar novas turmas
 
@@ -27,3 +27,7 @@ Para a proxima demanda:
 - desenvolver as demais funções restantes
 - dar merge no main
 - Melhorias visuais
+
+03/08/2026 (V 0.5):
+- Melhorias visuais
+- refatoração dos switch case de professor_cadastro.c e 

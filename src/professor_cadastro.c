@@ -45,19 +45,23 @@ void cadastro_professor () {
 
     professor1.cadastrado = true; //o sistema recebe a informação de que o professor se cadastrou
 
-    printf("- Selecione o que você deseja: \n");
-    printf("[1] Cadastrar turma\n");
-    printf("[2] Sair\n");
-    scanf("%d", &opcao);
+    do {
+        printf("\n┌─────────────────────────────┐\n");
+        printf("\n- Selecione o que você deseja: \n");
+        printf("\n[1] Cadastrar turma\n");
+        printf("[2] Sair\n");
+        printf("└─────────────────────────────┘\n");
+        scanf("%d", &opcao);
 
-    switch (opcao) {
-        case 1:
-            turma_cadastro(professor1.cadastrado);
-            break;
-        case 2:
-            printf("Obrigado pelo seu cadastro!");
-            break;
-        default:
-            printf("Opção inválida, selecione uma opção existente e refaça o cadastro.");
-    }
+        switch (opcao) {
+            case 1:
+                turma_cadastro(professor1.cadastrado);
+                break;
+            case 2:
+                printf("Obrigado pelo seu cadastro!");
+                break;
+            default:
+                printf("Opção inválida, selecione uma opção existente.\n");
+            }
+    } while (opcao != 1 && opcao != 2);
 }

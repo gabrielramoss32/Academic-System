@@ -14,7 +14,6 @@ typedef struct {
 
 extern Turma turmas[MAX_TURMAS]; //define uma unica variável de turmas na memoria, localizada em
 extern int qtd_turmas; //variável para controlar o índice de turmas cadastradas
-extern int contTurma; //variável para informar a quantidade de turmas cadastradas ao usuário
 
 void turma_cadastro (bool professor1_cadastrado);
 
