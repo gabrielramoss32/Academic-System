@@ -4,7 +4,7 @@
 #include "cadastro_turma.h"
 
 Professor professor1 = {
-    .cadastrado = false //professor global definido como sem cadastro
+    .cadastrado = true //professor global definido como sem cadastro
 };
 
 Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada
@@ -55,7 +55,7 @@ void cadastro_professor () {
 
         switch (opcao) {
             case 1:
-                turma_cadastro(professor1.cadastrado);
+                turma_cadastro(professor1.cadastrado); //passa como parametro a variavel booleana como true
                 break;
             case 2:
                 printf("Obrigado pelo seu cadastro!");

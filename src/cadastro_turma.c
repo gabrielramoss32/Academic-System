@@ -4,6 +4,7 @@
 #include "cadastro_turma.h"
 #include "menu.h"
 #include "professor_cadastro.h"
+#include "gerenciamento_turma.h"
 
 Turma turmas[MAX_TURMAS]; //Variável turmas, declarada pelo typedef da struct turma
 int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas;
@@ -32,7 +33,7 @@ void turma_cadastro (bool professor1_cadastrado) {
         getchar(); //come o enter do buffer
         fgets(turmas[qtd_turmas].disciplina, sizeof(turmas[qtd_turmas].disciplina), stdin);
 
-        printf("\n- Turma nº %d/2 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
+        printf("\n- Turma nº %d/10 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
         qtd_turmas++; //Incrementação da quantidade de turma atual
 
         do {
@@ -47,18 +48,18 @@ void turma_cadastro (bool professor1_cadastrado) {
 
             switch (opcao) {
                 case 1:
-                    if (qtd_turmas == 2) {
+                    if (qtd_turmas == 9) {
                         printf("Quantidade de turmas excedida, selecione uma opção existente.");
-                        opcao = 0;
+                        opcao = 0; //zera o switch de opçao e retorna o menu caso ele tente cadastrar apos o limite
                     } else {
-                        turma_cadastro(professor1.cadastrado);
+                        turma_cadastro(professor1.cadastrado); //chama novamente para cadastrar mais turma
                     }
                     break;
                 case 2:
-
+                
                     break;
                 case 3:
-
+                    acessar_turma();
                     break;
                 case 4:
 
