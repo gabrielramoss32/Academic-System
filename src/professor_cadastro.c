@@ -4,7 +4,7 @@
 #include "cadastro_turma.h"
 
 Professor professor1 = {
-    .cadastrado = true //professor global definido como sem cadastro
+    .cadastrado = true //professor global definido como sem cadastro (pode ser alterado para fins de teste)
 };
 
 Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada

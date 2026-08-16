@@ -18,8 +18,6 @@ void turma_cadastro (bool professor1_cadastrado) {
         menu_inicial();
     } else {
 
-        int opcao; //opção do switch case para gerenciar turma
-
         printf("Insira a série da turma (6º, 7º, 8º): ");
         scanf("%d", &turmas[qtd_turmas].serie);
 
@@ -35,41 +33,46 @@ void turma_cadastro (bool professor1_cadastrado) {
 
         printf("\n- Turma nº %d/10 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
         qtd_turmas++; //Incrementação da quantidade de turma atual
-
-        do {
-            printf("\n┌─────────────────────────────┐\n");
-            printf("[1] Cadastrar nova turma\n");
-            printf("[2] Editar turma\n");
-            printf("[3] Acessar turma\n");
-            printf("[4] Excluir turma\n");
-            printf("[5] Sair\n");
-            printf("└─────────────────────────────┘\n");
-            scanf("%d", &opcao);
-
-            switch (opcao) {
-                case 1:
-                    if (qtd_turmas == 9) {
-                        printf("Quantidade de turmas excedida, selecione uma opção existente.");
-                        opcao = 0; //zera o switch de opçao e retorna o menu caso ele tente cadastrar apos o limite
-                    } else {
-                        turma_cadastro(professor1.cadastrado); //chama novamente para cadastrar mais turma
-                    }
-                    break;
-                case 2:
-                
-                    break;
-                case 3:
-                    acessar_turma();
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-                    printf("Agradecemos pelo cadastro da turma.");
-                    break;
-                default:
-                    printf("Opção inválida, selecione uma opção existente: \n");
-                } 
-        } while (opcao > 5 || opcao < 1);
+        menu_turma();
     }
+}
+
+void menu_turma () {
+    int opcao; //opção do switch case para gerenciar turma
+
+    do {
+        printf("\n┌─────────────────────────────┐\n");
+        printf("[1] Cadastrar nova turma\n");
+        printf("[2] Editar turma\n");
+        printf("[3] Acessar turma\n");
+        printf("[4] Excluir turma\n");
+        printf("[5] Sair\n");
+        printf("└─────────────────────────────┘\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                if (qtd_turmas == 9) {
+                    printf("Quantidade de turmas excedida, selecione uma opção existente.");
+                    opcao = 0; //zera o switch de opçao e retorna o menu caso ele tente cadastrar apos o limite
+                } else {
+                    turma_cadastro(professor1.cadastrado); //chama novamente para cadastrar mais turma
+                }
+                break;
+            case 2:
+                editar_turma();
+                break;
+            case 3:
+                acessar_turma();
+                break;
+            case 4:
+
+                break;
+            case 5:
+                printf("Agradecemos pelo cadastro da turma.");
+                break;
+            default:
+                printf("Opção inválida, selecione uma opção existente: \n");
+            } 
+    } while (opcao > 5 || opcao < 1);
 }

@@ -21,13 +21,6 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - Adicionado estrutura para gerenciamento das turmas em cadastro_turma.c
 - Adicionado função de cadastrar novas turmas
 
-Para a proxima demanda:
-- adicionar retorno em professor_cadastro.c no switch case
-- adicionar retorno no cadastro de novas turmas caso a quantidade exceda 10
-- desenvolver as demais funções restantes
-- dar merge no main
-- Melhorias visuais
-
 03/08/2026 (V 0.5):
 - Melhorias visuais
 - refatoração dos switch case de professor_cadastro.c e cadastro_turma.c
@@ -36,7 +29,12 @@ Para a proxima demanda:
 - Adicionada função de acesso as turmas
 - iniciada a função de listar os dados para serem editados das turmas
 
-para o proximo dia: 
-- testar o do while de editar turmas
-- corrigir o menu para nao chamar a mesma função
-- terminar a função de editar turmas
+16/08/2026 (V 0.7):
+- removida Struct de editar dados das turmas
+- adicionada e testada a função de editar turmas
+- adicionada gerenciamento completo de menus de gerenciamento de turmas
+- refatoração do cadastro de turmas, dividindo em duas funções
+
+para o proximo dia:
+- criar função de excluir turmas
+- iniciar o possível acesso das turmas e montar o esqueleto das funções de gerenciamento de alunos
