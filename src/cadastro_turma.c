@@ -66,7 +66,7 @@ void menu_turma () {
                 acessar_turma();
                 break;
             case 4:
-
+                excluir_turma();
                 break;
             case 5:
                 printf("Agradecemos pelo cadastro da turma.");

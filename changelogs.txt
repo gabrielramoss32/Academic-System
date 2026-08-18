@@ -35,6 +35,10 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - adicionada gerenciamento completo de menus de gerenciamento de turmas
 - refatoração do cadastro de turmas, dividindo em duas funções
 
+17/08/2026 (V 0.8):
+- adicionada função de excluir turmas (carece de testes ainda)
+
 para o proximo dia:
-- criar função de excluir turmas
-- iniciar o possível acesso das turmas e montar o esqueleto das funções de gerenciamento de alunos
+- refatoração geral de problemas do projeto
+- resolver bug ao sair da turma
+(cadastra uma -> exclui a turma -> volta para o menu -> clica 5 para sair -> volta para a exclusao de turmas)

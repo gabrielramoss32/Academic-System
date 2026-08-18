@@ -78,3 +78,46 @@ void dados_editar_turma (int opcao_edit) {
         }
     } while (opcao != 6); //repete o menu, exceto se ele quiser voltar para o anterior
 }
+
+void excluir_turma() {
+
+    int opcao;
+    char confirm; //variavel de confirmação da exclusão
+    if (qtd_turmas > 0) {
+        do {
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Selecione qual turma deseja excluir: "); //lista todas as turmas disponíveis para exclusão
+            for (int i = 0; i < qtd_turmas; i++) {
+                printf("\nTurma Nº%d\n", i+1);
+                printf("Série: %dº ano %c\n", turmas[i].serie, turmas[i].turma);
+                printf("Turno: %s\n", turmas[i].turno);
+                printf("Disciplina: %s", turmas[i].disciplina);
+                printf("Digite %d para excluir.\n", i);
+            }
+            printf("\n└─────────────────────────────────────┘\n");
+            scanf("%d", &opcao);
+
+            if (opcao >= 0 && opcao <= qtd_turmas) {
+                printf("\nDeseja realmente excluir essa turma? (S/N)\n");
+                scanf(" %c", &confirm);
+                if (confirm == 'S' || confirm == 's') {
+                    for (int i = 0; i < qtd_turmas; i++) {
+                        turmas[opcao] = turmas[opcao + 1]; 
+                        opcao++; //incrementa para fazer isso com a próxima turma
+                }
+                    qtd_turmas--; //retira uma quantidade de turma cadastrada
+                    printf("\nExclusão bem sucedida, você retornará ao menu.\n");
+                    menu_turma();
+                } else {
+                    printf("\nExclusão cancelada, você retornará ao menu.\n");
+                    menu_turma(); //chama o menu novamente caso ele não queira excluir a turma
+                }
+            } else {
+                printf("\nOpção inválida, selecione uma turma existente.\n");
+            }
+        } while (opcao < 0 || opcao > qtd_turmas); //repete o menu caso a turma selecionada nao exista
+    } else {
+        printf("\nNão há turmas para excluir, selecione outra opção ou cadastre uma turma.\n");
+        menu_turma();
+    }  
+}
