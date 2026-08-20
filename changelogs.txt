@@ -38,7 +38,11 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 17/08/2026 (V 0.8):
 - adicionada função de excluir turmas (carece de testes ainda)
 
-para o proximo dia:
-- refatoração geral de problemas do projeto
-- resolver bug ao sair da turma
-(cadastra uma -> exclui a turma -> volta para o menu -> clica 5 para sair -> volta para a exclusao de turmas)
+19/08/2026 (V 0.9):
+- bug de função envolvendo a exclusao de turmas resolvido
+
+Primeiros passos da refatoração:
+- Adicionar verificação em editar turmas (nao executar a função se nao houver turmas para editar)
+- Retirar a recursao da função de editar turmas
+
+Após isso, recomenda-se reavaliar todo o fluxo do projeto, e junto com a IA, iniciar o processo
