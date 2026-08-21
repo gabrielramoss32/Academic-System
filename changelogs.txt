@@ -41,8 +41,10 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 19/08/2026 (V 0.9):
 - bug de função envolvendo a exclusao de turmas resolvido
 
-Primeiros passos da refatoração:
-- Adicionar verificação em editar turmas (nao executar a função se nao houver turmas para editar)
-- Retirar a recursao da função de editar turmas
+21/08/2026 (V 0.99):
+- bug de edição de função removido
+- adicionado verificação em editar turmas
 
-Após isso, recomenda-se reavaliar todo o fluxo do projeto, e junto com a IA, iniciar o processo
+Para os proximos dias:
+- reavaliar o fluxo do projeto e iniciar a refatoração
+- Adicionar verificação de acesso as turmas (nao poder acessar se nao existir turmas)

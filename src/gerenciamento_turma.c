@@ -19,7 +19,8 @@ void acessar_turma () {
 void editar_turma () {
     int opcao_edit; //opcao do switch case para decidir qual turma sera editada
 
-    do {
+    if (qtd_turmas > 0) { //verifica se existem turmas
+        do {
         printf("\n┌─────────────────────────────────────┐\n");
         printf("- Selecione qual turma deseja editar: \n");
         for (int i = 0; i < qtd_turmas; i++) { //lista todas as turmas disponíveis para edição
@@ -27,13 +28,17 @@ void editar_turma () {
             printf("Série: %dº ano %c | %s\n", turmas[i].serie, turmas[i].turma, turmas[i].turno);
             printf("Digite %d para editar.\n", i);
         }
+        printf("\n└─────────────────────────────────────┘\n");
             scanf("%d", &opcao_edit);
             if (opcao_edit >= 0 && opcao_edit <= qtd_turmas) {
                 dados_editar_turma(opcao_edit); //chama a função de editar dados da turma e passa o indice da turma a ser editada
             } else {
                 printf("\nOpção inválida, selecione uma turma existente.\n");
             }
-    } while (opcao_edit < 0 || opcao_edit > qtd_turmas); //repete o menu caso a opção nao seja nenhuma das turmas
+        } while (opcao_edit < 0 || opcao_edit > qtd_turmas); //repete o menu caso a opção nao seja nenhuma das turmas
+    } else {
+        printf("\nNão há turmas para editar, cadastre uma.\n");
+    }
 }
 
 void dados_editar_turma (int opcao_edit) {
@@ -45,38 +50,37 @@ void dados_editar_turma (int opcao_edit) {
         printf("[2] Turma\n");
         printf("[3] Turno\n");
         printf("[4] Matéria\n");
-        printf("[5] Editar outra turma\n");
-        printf("[6] Voltar ao menu\n");
+        printf("[5] Voltar ao menu\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
                 printf("Digite a nova série: ");
                 scanf("%d", &turmas[opcao_edit].serie); //a serie antiga recebe a nova
+                printf("\nSérie alterada.");
                 break;
             case 2:
                 printf("Digite a nova turma: ");
                 scanf(" %c", &turmas[opcao_edit].turma); //a turma antiga recebe a nova
+                printf("\nTurma alterada.");
                 break;
             case 3:
                 printf("Digite o novo turno: ");
                 scanf("%s", turmas[opcao_edit].turno); //o turno antigo recebe o novo
+                printf("\nTurno alterado.");
                 break;
             case 4:
                 printf("Digite a nova matéria: ");
                 getchar(); //come o enter do buffer
                 fgets(turmas[opcao_edit].disciplina, sizeof(turmas[opcao_edit].disciplina), stdin); //a disciplina antiga recebe a nova
+                printf("\nMatéria alterada.");
                 break;
             case 5:
-                editar_turma();
-                break;
-            case 6:
-                menu_turma();
                 break;
             default:
                 printf("Opção inválida, selecione uma opção existente.");
         }
-    } while (opcao != 6); //repete o menu, exceto se ele quiser voltar para o anterior
+    } while (opcao != 5); //repete o menu, exceto se ele quiser voltar para o anterior
 }
 
 void excluir_turma() {
