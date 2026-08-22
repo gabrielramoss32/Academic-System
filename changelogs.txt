@@ -46,5 +46,8 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - adicionado verificação em editar turmas
 
 Para os proximos dias:
-- reavaliar o fluxo do projeto e iniciar a refatoração
 - Adicionar verificação de acesso as turmas (nao poder acessar se nao existir turmas)
+- definir os set locale de maneira global
+- Melhorias visuais
+- subir o repositorio e pedir pro gpt dar mais opinioes de refatoração
+- dar merge no main e excluir as branches
