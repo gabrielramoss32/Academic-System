@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<windows.h>
 #include "professor_cadastro.h"
 #include "cadastro_turma.h"
 
@@ -10,9 +9,6 @@ Professor professor1 = {
 Professor professor1; //Variável professor1, declarada pela definição de professor na struct declarada
 
 void cadastro_professor () {
-    SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
-    SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
-
     int opcao; //opcao do switch case de cadastrar turma ou sair
 
     printf("Insira seu ID: ");
@@ -41,7 +37,7 @@ void cadastro_professor () {
     getchar();  //come o enter do buffer
     fgets(professor1.escola, sizeof(professor1.escola), stdin);
 
-    printf("\nCadastro realizado! Seja bem-vindo %s\n", professor1.nome);
+    printf("\nCadastro realizado! Seja bem-vindo %s", professor1.nome);
 
     professor1.cadastrado = true; //o sistema recebe a informação de que o professor se cadastrou
 

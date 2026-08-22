@@ -5,11 +5,7 @@
 #include "cadastro_turma.h"
 
 void menu_inicial () {
-    SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
-    SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
-
     //Raiz do projeto: 1ª etapa a ser chamada
-
     int opcao; //opcao inicial do switch case
     
     do {

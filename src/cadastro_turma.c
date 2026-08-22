@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<windows.h>
 #include<stdbool.h>
 #include "cadastro_turma.h"
 #include "menu.h"
@@ -11,8 +10,6 @@ int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas;
 bool acesso_menu = true;
 
 void turma_cadastro (bool professor1_cadastrado) {
-    SetConsoleOutputCP(CP_UTF8); //Configura para permitir acentos na saída
-    SetConsoleCP(CP_UTF8); //Configura para permitir acentos na entrada
 
     if (!professor1_cadastrado) { //verifica se o professor está cadastrado
         printf("Você ainda não realizou o seu cadastro, realize ele para cadastrar as suas turmas.\n");
@@ -54,8 +51,8 @@ void menu_turma () {
 
         switch (opcao) {
             case 1:
-                if (qtd_turmas == 9) {
-                    printf("Quantidade de turmas excedida, selecione uma opção existente.");
+                if (qtd_turmas >= MAX_TURMAS) {
+                    printf("Quantidade de turmas excedida, selecione uma opção existente.\n");
                     opcao = 0; //zera o switch de opçao e retorna o menu caso ele tente cadastrar apos o limite
                 } else {
                     turma_cadastro(professor1.cadastrado); //chama novamente para cadastrar mais turma

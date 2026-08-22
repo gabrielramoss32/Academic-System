@@ -45,9 +45,11 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 - bug de edição de função removido
 - adicionado verificação em editar turmas
 
+22/08/2026 (V 1.0):
+- set locale de maneira global definidos
+- melhorias visuais
+- melhorias lógicas
+
 Para os proximos dias:
 - Adicionar verificação de acesso as turmas (nao poder acessar se nao existir turmas)
-- definir os set locale de maneira global
-- Melhorias visuais
-- subir o repositorio e pedir pro gpt dar mais opinioes de refatoração
 - dar merge no main e excluir as branches
