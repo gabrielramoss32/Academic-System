@@ -30,5 +30,5 @@ void menu_inicial () {
             default: //para numeros diferentes dos selecionados
                 printf("Opção inválida, selecione uma opção existente.\n");
         }
-    } while (opcao < 0 || opcao > 3);
+    } while (opcao <= 0 || opcao > 3);
 }
