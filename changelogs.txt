@@ -1,21 +1,28 @@
-gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
-./sistema -> Rodar depois
+【C】【h】【a】【n】【g】【e】【l】【o】【g】【s】
+
+→ Documento do projeto responsável por listar todas as alterações e etapas do projeto, documentados com sua data, versão e alterações feitas.
+
+→ Código de compilação do projeto:
+gcc src/*.c -Iinclude -o sistema
+
+→ Código para rodar o projeto:
+./sistema
 
 30/07/2026 (V 0.1):
 - Adicionado main definido
 - Adicionado e estruturado headers de menu e cadastro de professor
-- Adicionado codigos de menu e cadastro do professor
+- Adicionado códigos de menu e cadastro do professor
 - Adicionado git ignore
 
 31/07/2026 (V 0.2):
 - Struct de professor movido para o professor_cadastro.h
 - Melhorias visuais do menu
-- verificação de id
-- inicio do desenvolvimento da função de cadastrar turmas
-- comunicação entre a confirmação de cadastro do professor no menu e de cadastrar turmas
+- Verificação de id
+- Inicio do desenvolvimento da função de cadastrar turmas
+- Comunicação entre a confirmação de cadastro do professor no menu e de cadastrar turmas
 
 01/08/2026 (V 0.3):
-- bug de validação e chamar função arrumado
+- Bug de validação e chamar função arrumado
 
 02/08/2026 (V 0.4):
 - Adicionado estrutura para gerenciamento das turmas em cadastro_turma.c
@@ -23,33 +30,37 @@ gcc src/*.c -Iinclude -o sistema -> Codigo de compilaçao
 
 03/08/2026 (V 0.5):
 - Melhorias visuais
-- refatoração dos switch case de professor_cadastro.c e cadastro_turma.c
+- Refatoração dos switch case de professor_cadastro.c e cadastro_turma.c
 
 03/08/2026 (V 0.6):
 - Adicionada função de acesso as turmas
-- iniciada a função de listar os dados para serem editados das turmas
+- Iniciada a função de listar os dados para serem editados das turmas
 
 16/08/2026 (V 0.7):
-- removida Struct de editar dados das turmas
-- adicionada e testada a função de editar turmas
-- adicionada gerenciamento completo de menus de gerenciamento de turmas
-- refatoração do cadastro de turmas, dividindo em duas funções
+- Removida struct de editar dados das turmas
+- Adicionada e testada a função de editar turmas
+- Adicionada gerenciamento completo de menus de gerenciamento de turmas
+- Refatoração do cadastro de turmas, dividindo em duas funções
 
 17/08/2026 (V 0.8):
-- adicionada função de excluir turmas (carece de testes ainda)
+- Adicionada função de excluir turmas
 
 19/08/2026 (V 0.9):
-- bug de função envolvendo a exclusao de turmas resolvido
+- Bug de função envolvendo a exclusão de turmas resolvido
 
 21/08/2026 (V 0.99):
-- bug de edição de função removido
-- adicionado verificação em editar turmas
+- Bug de edição de função removido
+- Adicionado verificação em editar turmas
 
 22/08/2026 (V 1.0):
-- set locale de maneira global definidos
-- melhorias visuais
-- melhorias lógicas
+- Set locale de maneira global definidos
+- Melhorias visuais
+- Melhorias lógicas
 
-Para os proximos dias:
-- Adicionar verificação de acesso as turmas (nao poder acessar se nao existir turmas)
-- dar merge no main e excluir as branches
+23/08/2026 (V 1.1):
+- Definição dupla de professor1 removida
+- Condição do do while do menu inicial alterada
+- Merge no main
+
+Para o proximo dia:
+- Iniciar o desenvolvimento do gerenciamento de alunos
