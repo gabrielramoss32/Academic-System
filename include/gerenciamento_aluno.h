@@ -1,0 +1,11 @@
+#ifndef GERENCIAMENTO_ALUNO_H
+#define GERENCIAMENTO_ALUNO_H
+#define MAX_AVALIACOES 5
+
+typedef struct {
+    int matricula; //variavel com a matricula de cada aluno
+    char nome[80]; //nome de cada aluno, com limite de ate 80 caracteres
+    int notas[MAX_AVALIACOES]; //vetor de notas de cada aluno, com o maximo de 5 notas
+} Aluno;
+
+#endif 
