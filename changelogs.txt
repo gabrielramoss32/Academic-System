@@ -62,5 +62,12 @@ gcc src/*.c -Iinclude -o sistema
 - Condição do do while do menu inicial alterada
 - Merge no main
 
+06/09/2026 (V 1.2):
+- Declarada struct dos alunos (pode ser alterado)
+- Incluido vetores de alunos na struct das turmas
+ 
+07/09/2026 (V 1.29): 
+- Montado menu de gerenciamento dos alunos
+
 Para o proximo dia:
-- Iniciar o desenvolvimento do gerenciamento de alunos
+- Iniciar o desenvolvimento das demais funções
