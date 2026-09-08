@@ -1,18 +1,34 @@
 #include<stdio.h>
 #include "cadastro_turma.h"
 #include "gerenciamento_turma.h"
+#include "gerenciamento_aluno.h"
 
 void acessar_turma () {
-    printf("\n┌─────────────────────────────────────┐\n");
-    printf("- Selecione qual turma deseja acessar: \n");
-    //Realiza a listagem de todas as turmas
-    for (int i = 0; i < qtd_turmas; i++) {
-        printf("\nTurma Nº%d\n", i+1);
-        printf("Série: %dº ano %c\n", turmas[i].serie, turmas[i].turma);
-        printf("Turno: %s\n", turmas[i].turno);
-        printf("Disciplina: %s", turmas[i].disciplina);
+    int opcao_acesso; //Variavel para controlar o acesso das turmas
+
+    if (qtd_turmas > 0) {
+        do {
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Selecione qual turma deseja acessar: \n");
+            //Realiza a listagem de todas as turmas
+            for (int i = 0; i < qtd_turmas; i++) {
+                printf("\nTurma Nº%d\n", i+1);
+                printf("Série: %dº ano %c\n", turmas[i].serie, turmas[i].turma);
+                printf("Turno: %s\n", turmas[i].turno);
+                printf("Disciplina: %s\n", turmas[i].disciplina);
+                printf("Digite %d para acessar.\n", i);
+            }
+            printf("└─────────────────────────────────────┘\n");
+            scanf("%d", &opcao_acesso);
+            if (opcao_acesso >= 0 && opcao_acesso < qtd_turmas) {
+                menu_alunos (opcao_acesso);
+            } else {
+                printf("\nOpção inválida, selecione uma turma existente.\n");
+            }
+        } while (opcao_acesso < 0 || opcao_acesso >= qtd_turmas); //repete o menu caso a turma inserida seja inválida
+    } else {
+        printf("\nNão há turmas para acessar, cadastre uma.\n");
     }
-    printf("\n└─────────────────────────────────────┘\n");
 }
 
 void editar_turma () {

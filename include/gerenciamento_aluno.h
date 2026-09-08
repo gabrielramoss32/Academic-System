@@ -8,4 +8,6 @@ typedef struct {
     int notas[MAX_AVALIACOES]; //vetor de notas de cada aluno, com o maximo de 5 notas
 } Aluno;
 
+void menu_alunos(int opcao_acesso);
+
 #endif 
