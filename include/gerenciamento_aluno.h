@@ -5,9 +5,10 @@
 typedef struct {
     int matricula; //variavel com a matricula de cada aluno
     char nome[80]; //nome de cada aluno, com limite de ate 80 caracteres
-    int notas[MAX_AVALIACOES]; //vetor de notas de cada aluno, com o maximo de 5 notas
+    float notas[MAX_AVALIACOES]; //vetor de notas de cada aluno, com o maximo de 5 notas
 } Aluno;
 
 void menu_alunos(int opcao_acesso);
+void cadastro_alunos(int opcao_acesso);
 
 #endif 

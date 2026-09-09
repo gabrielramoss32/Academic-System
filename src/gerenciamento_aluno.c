@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdbool.h>
 #include "cadastro_turma.h"
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
@@ -7,10 +8,10 @@ void menu_alunos (int opcao_acesso) {
     int opcao;
     do {
         printf("\n┌─────────────────────────────────────┐");
-        printf("\nTurma atual: %dº ano %s\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
+        printf("\nTurma atual: %dº ano %c\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
         printf("Alunos: %d\n", turmas[opcao_acesso].qtd_alunos);
-        printf("\n - Selecione a opção desejada: \n");
-        printf("[1] Cadastrar aluno\n");
+        printf("\n - Selecione a opção desejada:");
+        printf("\n[1] Cadastrar aluno\n");
         printf("[2] Editar aluno\n");
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
@@ -21,8 +22,77 @@ void menu_alunos (int opcao_acesso) {
         printf("[9] Voltar ao menu\n");
         printf("└─────────────────────────────────────┘\n");
         scanf("%d", &opcao);
-        if (opcao < 1 || opcao > 9) {
-            printf("Opção inválida, selecione uma opção existente");
+        
+        switch (opcao) {
+            case 1:
+                if (turmas[opcao_acesso].qtd_alunos >= MAX_ALUNOS) {
+                    printf("\nQuantidade de alunos excedida por turma, exclua um caso queira cadastrar.\n");
+                } else {
+                    cadastro_alunos(opcao_acesso);
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break; 
+            case 8:
+
+                break; 
+            case 9:
+
+                break;
+            default:
+                printf("\nOpção inválida, selecione uma opção existente.\n");         
         }
     } while (opcao != 9); //repete o menu ate o usuario querer sair
+}
+
+void cadastro_alunos (int opcao_acesso) {
+    int repetido = false;
+
+    printf("Insira o nome do aluno: ");
+    getchar(); //come o enter do buffer
+    fgets(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome,
+    sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin); //registra o nome do aluno
+
+    do {
+        printf("Digite a matrícula do aluno: ");
+        scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula); //registra a matriula do aluno
+
+        for (int i = 0; i < turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula; i++) { //percorre todas as matriculas registradas
+            if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula == 
+            turmas[opcao_acesso].alunos[i].matricula) { //verifica se aquele numero de matricula ja foi registrado
+                printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
+                repetido = true; //confirma que o ultimo numero de matricula registrado foi repetido
+            } else {
+                repetido = false; //confirma que o ultimo numero de matricula registrado não é repetido
+            }
+            break; //sai do laço caso seja encontrado um valor repetido
+        }
+
+        if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000 //verifica se a matricula tem 6 dígitos
+        || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999) {
+            printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
+        }
+
+    } while 
+    (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000
+    || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999 || repetido == true); //Repete se a matricula nao tiver 6 digitos ou se for repetida
+
+    printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
+    turmas[opcao_acesso].qtd_alunos++; //Incrementação da quantidade de alunos registrados naquela turma
 }

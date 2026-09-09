@@ -15,13 +15,13 @@ void acessar_turma () {
                 printf("\nTurma Nº%d\n", i+1);
                 printf("Série: %dº ano %c\n", turmas[i].serie, turmas[i].turma);
                 printf("Turno: %s\n", turmas[i].turno);
-                printf("Disciplina: %s\n", turmas[i].disciplina);
+                printf("Disciplina: %s", turmas[i].disciplina);
                 printf("Digite %d para acessar.\n", i);
             }
             printf("└─────────────────────────────────────┘\n");
             scanf("%d", &opcao_acesso);
             if (opcao_acesso >= 0 && opcao_acesso < qtd_turmas) {
-                menu_alunos (opcao_acesso);
+                menu_alunos(opcao_acesso);
             } else {
                 printf("\nOpção inválida, selecione uma turma existente.\n");
             }
