@@ -73,7 +73,5 @@ gcc src/*.c -Iinclude -o sistema
 - Iniciada função de cadastrar alunos
 - Verificação de 6 dígitos da matrícula testada e funcionando
 
-Para o proximo dia:
-- Resolver bug de comparar a matricula com ela mesma
-- Iniciar a função de listagem e testar se o armazenamento das variaveis estao funcionando
-- Testar a recursividade das funções
+09/09/2026 (V 1.39):
+- Resolvido bug de comparação da matrícula com ela mesma

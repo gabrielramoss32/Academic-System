@@ -62,7 +62,7 @@ void menu_alunos (int opcao_acesso) {
 }
 
 void cadastro_alunos (int opcao_acesso) {
-    int repetido = false;
+    bool repetido = false;
 
     printf("Insira o nome do aluno: ");
     getchar(); //come o enter do buffer
@@ -73,15 +73,13 @@ void cadastro_alunos (int opcao_acesso) {
         printf("Digite a matrícula do aluno: ");
         scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula); //registra a matriula do aluno
 
-        for (int i = 0; i < turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula; i++) { //percorre todas as matriculas registradas
+        for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todas as matriculas registradas
             if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula == 
             turmas[opcao_acesso].alunos[i].matricula) { //verifica se aquele numero de matricula ja foi registrado
                 printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
                 repetido = true; //confirma que o ultimo numero de matricula registrado foi repetido
-            } else {
-                repetido = false; //confirma que o ultimo numero de matricula registrado não é repetido
-            }
-            break; //sai do laço caso seja encontrado um valor repetido
+                break; //sai do laço caso seja encontrado um valor repetido
+            } //se nao encontrar matricula repetida, a variavel registradora continua como false
         }
 
         if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000 //verifica se a matricula tem 6 dígitos
@@ -91,8 +89,8 @@ void cadastro_alunos (int opcao_acesso) {
 
     } while 
     (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000
-    || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999 || repetido == true); //Repete se a matricula nao tiver 6 digitos ou se for repetida
+    || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999 || repetido == true); //repete se a matricula nao tiver 6 digitos ou se for repetida
 
     printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
-    turmas[opcao_acesso].qtd_alunos++; //Incrementação da quantidade de alunos registrados naquela turma
+    turmas[opcao_acesso].qtd_alunos++; //incrementação da quantidade de alunos registrados naquela turma
 }
