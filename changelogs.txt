@@ -75,3 +75,7 @@ gcc src/*.c -Iinclude -o sistema
 
 09/09/2026 (V 1.39):
 - Resolvido bug de comparação da matrícula com ela mesma
+
+09/09/2026 (V 1.4):
+- Encerrada função de cadastrar alunos
+- Função de listagem desenvolvida e terminada
