@@ -29,6 +29,7 @@ void turma_cadastro (bool professor1_cadastrado) {
         fgets(turmas[qtd_turmas].disciplina, sizeof(turmas[qtd_turmas].disciplina), stdin);
 
         printf("\n- Turma nº %d/10 cadastrada, selecione a próxima opção: \n", qtd_turmas + 1);
+        turmas[qtd_turmas].qtd_alunos = 0; //zera ou define a quantidade de alunos daquela turma como zero
         qtd_turmas++; //Incrementação da quantidade de turma atual
         if (acesso_menu) { //chama esse menu somente uma vez
             acesso_menu = false; //fecha qualquer possibilidade de abrir o menu novamente
