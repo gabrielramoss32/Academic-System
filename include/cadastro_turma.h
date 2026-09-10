@@ -3,7 +3,7 @@
 #define MAX_TURMAS 10 //Quantidade de turmas que pode ser registrado no sistema
 #include<stdbool.h>
 #include "gerenciamento_aluno.h"
-#define MAX_ALUNOS 35
+#define MAX_ALUNOS 35 //Quantidade de alunos que podem ser registrados
 
 typedef struct {
     int serie;
