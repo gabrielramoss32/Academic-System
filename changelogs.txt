@@ -79,3 +79,6 @@ gcc src/*.c -Iinclude -o sistema
 09/09/2026 (V 1.4):
 - Encerrada função de cadastrar alunos
 - Função de listagem desenvolvida e terminada
+
+10/09/2026 (V 1.5):
+- Função de edição de alunos desenvolvida (falta testar)

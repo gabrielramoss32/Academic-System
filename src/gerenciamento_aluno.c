@@ -11,11 +11,11 @@ void menu_alunos (int opcao_acesso) {
         printf("\nTurma atual: %dº ano %c\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
         printf("Alunos: %d\n", turmas[opcao_acesso].qtd_alunos);
         printf("\n - Selecione a opção desejada:\n");
-        printf("[1] Cadastrar aluno\n");
+        printf("[1] Cadastrar aluno\n"); //pronto
         printf("[2] Editar aluno\n");
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
-        printf("[5] Listar alunos\n");
+        printf("[5] Listar alunos\n"); //pronto
         printf("[6] Buscar aluno\n");
         printf("[7] Ver estatísticas da turma\n");
         printf("[8] Excluir aluno\n");
@@ -32,7 +32,7 @@ void menu_alunos (int opcao_acesso) {
                 }
                 break;
             case 2:
-
+                
                 break;
             case 3:
 
@@ -41,7 +41,7 @@ void menu_alunos (int opcao_acesso) {
 
                 break;
             case 5:
-                if (turmas[opcao_acesso].qtd_alunos == 0) {
+                if (turmas[opcao_acesso].qtd_alunos == 0) { //verifica se tem alunos para serem listados
                     printf("\nNão há alunos para serem listados, cadastre um.\n");
                 } else {
                     listar_alunos(opcao_acesso);
@@ -107,4 +107,57 @@ void listar_alunos (int opcao_acesso) {
         printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula); //exibe o numero, nome e matricula do aluno
     }
     printf("└─────────────────────────────────────┘\n");
+}
+
+void editar_alunos (int opcao_acesso) {
+    int opcao_edit; //opção para decidir qual aluno será editado
+
+    if (turmas[opcao_acesso].qtd_alunos > 0) { //verifica se tem alunos para serem editados
+        do {
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Digite o número do aluno que quer editar:\n");
+            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+                printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula);
+            }
+            printf("└─────────────────────────────────────┘\n");
+            scanf("%d", &opcao_edit);
+            if (opcao_edit >= 0 && opcao_edit < turmas[opcao_acesso].qtd_alunos) {
+                dados_editar_aluno(opcao_edit, opcao_acesso);
+            } else {
+                printf("\nOpção inválida, selecione um aluno existente");
+            }
+        } while (opcao_edit < 0 || opcao_edit >= turmas[opcao_acesso].qtd_alunos); //repete o menu caso o aluno selecionado não exista
+    } else {
+        printf("\nNão há aluno para ser editado, cadastre um.\n");
+    }
+}
+
+void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
+    int opcao;
+
+    do {
+        printf("\n- Selecione o que deseja editar:\n");
+        printf("[1] Nome do aluno\n");
+        printf("[2] Matrícula do aluno\n");
+        printf("[3] Voltar ao menu\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                printf("Digite o novo nome do aluno: ");
+                fgets(turmas[opcao_acesso].alunos[opcao_edit].nome,
+                sizeof(turmas[opcao_acesso].alunos[opcao_edit].nome), stdin); //pega o novo nome do aluno
+                printf("\nNome alterado.\n");
+                break;
+            case 2:
+                printf("Digite a nova matrícula do aluno: ");
+                scanf("%d", &turmas[opcao_acesso].alunos[opcao_edit].matricula); //pega a nova matricula do aluno
+                printf("\nMatrícula alterada.\n");
+                break;
+            case 3:
+                break;
+            default:
+                printf("Opção inválida, selecione uma opção existente.");
+        }
+    } while (opcao != 3); //repete enquanto o usuario nao quiser sair
 }

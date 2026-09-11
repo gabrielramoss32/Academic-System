@@ -11,5 +11,6 @@ typedef struct {
 void menu_alunos(int opcao_acesso);
 void cadastro_alunos(int opcao_acesso); //função para o cadastro dos alunos
 void listar_alunos(int opcao_acesso); //função para a listagem de todos os alunos daquela turma
+void editar_alunos(int opcao_acesso); //função para entrar na edição de alunos
 
 #endif 
