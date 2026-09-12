@@ -157,6 +157,9 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
                     printf("Digite a nova matrícula do aluno (6 dígitos): ");
                     scanf("%d", &turmas[opcao_acesso].alunos[opcao_edit].matricula); 
                     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { 
+                        if (i == opcao_edit) { //evita de comparar a matricula com ela mesma
+                            continue;
+                        }
                         if (turmas[opcao_acesso].alunos[opcao_edit].matricula == turmas[opcao_acesso].alunos[i].matricula) { 
                             printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
                             repetido = true; 
