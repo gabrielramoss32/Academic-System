@@ -36,14 +36,14 @@ void editar_turma () {
 
     if (qtd_turmas > 0) { //verifica se existem turmas
         do {
-        printf("\n┌─────────────────────────────────────┐\n");
-        printf("- Selecione qual turma deseja editar: \n");
-        for (int i = 0; i < qtd_turmas; i++) { //lista todas as turmas disponíveis para edição
-            printf("\nTurma de %s", turmas[i].disciplina);
-            printf("Série: %dº ano %c | %s\n", turmas[i].serie, turmas[i].turma, turmas[i].turno);
-            printf("Digite %d para editar.\n", i);
-        }
-        printf("└─────────────────────────────────────┘\n");
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Selecione qual turma deseja editar: \n");
+            for (int i = 0; i < qtd_turmas; i++) { //lista todas as turmas disponíveis para edição
+                printf("\nTurma de %s", turmas[i].disciplina);
+                printf("Série: %dº ano %c | %s\n", turmas[i].serie, turmas[i].turma, turmas[i].turno);
+                printf("Digite %d para editar.\n", i);
+            }
+            printf("└─────────────────────────────────────┘\n");
             scanf("%d", &opcao_edit);
             if (opcao_edit >= 0 && opcao_edit < qtd_turmas) {
                 dados_editar_turma(opcao_edit); //chama a função de editar dados da turma e passa o indice da turma a ser editada

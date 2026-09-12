@@ -81,4 +81,11 @@ gcc src/*.c -Iinclude -o sistema
 - Função de listagem desenvolvida e terminada
 
 10/09/2026 (V 1.5):
-- Função de edição de alunos desenvolvida (falta testar)
+- Função de edição de alunos desenvolvida e testada
+
+11/09/2026:
+- Adicionada verificação dentro das funções
+- Outras pequenas Refatoração
+
+Para o proximo dia:
+-> Resolver o bug da matricula na edição estar sendo comparada a ela mesma

@@ -54,7 +54,6 @@ void menu_turma () {
             case 1:
                 if (qtd_turmas >= MAX_TURMAS) {
                     printf("Quantidade de turmas excedida, selecione uma opção existente.\n");
-                    opcao = 0; //zera o switch de opçao e retorna o menu caso ele tente cadastrar apos o limite
                 } else {
                     turma_cadastro(professor1.cadastrado); //chama novamente para cadastrar mais turma
                 }

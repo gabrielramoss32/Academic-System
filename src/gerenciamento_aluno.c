@@ -12,7 +12,7 @@ void menu_alunos (int opcao_acesso) {
         printf("Alunos: %d\n", turmas[opcao_acesso].qtd_alunos);
         printf("\n - Selecione a opção desejada:\n");
         printf("[1] Cadastrar aluno\n"); //pronto
-        printf("[2] Editar aluno\n");
+        printf("[2] Editar aluno\n"); //pronto
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
         printf("[5] Listar alunos\n"); //pronto
@@ -32,7 +32,7 @@ void menu_alunos (int opcao_acesso) {
                 }
                 break;
             case 2:
-                
+                editar_alunos(opcao_acesso);
                 break;
             case 3:
 
@@ -41,11 +41,7 @@ void menu_alunos (int opcao_acesso) {
 
                 break;
             case 5:
-                if (turmas[opcao_acesso].qtd_alunos == 0) { //verifica se tem alunos para serem listados
-                    printf("\nNão há alunos para serem listados, cadastre um.\n");
-                } else {
-                    listar_alunos(opcao_acesso);
-                }
+                listar_alunos(opcao_acesso);
                 break;
             case 6:
 
@@ -57,7 +53,6 @@ void menu_alunos (int opcao_acesso) {
 
                 break; 
             case 9:
-
                 break;
             default:
                 printf("\nOpção inválida, selecione uma opção existente.\n");         
@@ -66,15 +61,16 @@ void menu_alunos (int opcao_acesso) {
 }
 
 void cadastro_alunos (int opcao_acesso) {
-    bool repetido; //variavel que controla se a matrícula foi repetida ou não
+    bool repetido, irregular; //variáveis que controlam a validação da matrícula
 
     printf("Insira o nome do aluno: ");
-    getchar(); //come o enter do buffer
+    getchar();
     fgets(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome,
     sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin); //registra o nome do aluno
 
     do {
         repetido = false;
+        irregular = false;
         printf("Digite a matrícula do aluno (6 dígitos): ");
         scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula); //registra a matriula do aluno
 
@@ -90,23 +86,26 @@ void cadastro_alunos (int opcao_acesso) {
         if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000 //verifica se a matricula tem 6 dígitos
         || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999) {
             printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
+            irregular = true;
         }
 
-    } while 
-    (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000
-    || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999 || repetido == true); //repete se a matricula nao tiver 6 digitos ou se for repetida
+    } while (irregular == true || repetido == true); //repete se a matricula nao tiver 6 digitos ou se for repetida
 
     printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
     turmas[opcao_acesso].qtd_alunos++; //incrementação da quantidade de alunos registrados naquela turma
 }
 
 void listar_alunos (int opcao_acesso) {
-    printf("\n┌─────────────────────────────────────┐");
-    printf("\nAlunos do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma); //mostra a turma em que os alunos serão listados
-    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-        printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula); //exibe o numero, nome e matricula do aluno
+    if (turmas[opcao_acesso].qtd_alunos == 0) {
+        printf("\nNão há alunos para serem listados, cadastre um.\n");
+    } else {
+        printf("\n┌─────────────────────────────────────┐");
+        printf("\nAlunos do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma); //mostra a turma em que os alunos serão listados
+        for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+            printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula); //exibe o numero, nome e matricula do aluno
+        }
+        printf("└─────────────────────────────────────┘\n");
     }
-    printf("└─────────────────────────────────────┘\n");
 }
 
 void editar_alunos (int opcao_acesso) {
@@ -116,7 +115,7 @@ void editar_alunos (int opcao_acesso) {
         do {
             printf("\n┌─────────────────────────────────────┐\n");
             printf("- Digite o número do aluno que quer editar:\n");
-            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //lista todos os alunos
                 printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula);
             }
             printf("└─────────────────────────────────────┘\n");
@@ -145,13 +144,30 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
         switch (opcao) {
             case 1:
                 printf("Digite o novo nome do aluno: ");
+                getchar();
                 fgets(turmas[opcao_acesso].alunos[opcao_edit].nome,
                 sizeof(turmas[opcao_acesso].alunos[opcao_edit].nome), stdin); //pega o novo nome do aluno
                 printf("\nNome alterado.\n");
                 break;
             case 2:
-                printf("Digite a nova matrícula do aluno: ");
-                scanf("%d", &turmas[opcao_acesso].alunos[opcao_edit].matricula); //pega a nova matricula do aluno
+                bool repetido, irregular;
+                do {
+                    repetido = false;
+                    irregular = false;
+                    printf("Digite a nova matrícula do aluno (6 dígitos): ");
+                    scanf("%d", &turmas[opcao_acesso].alunos[opcao_edit].matricula); 
+                    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { 
+                        if (turmas[opcao_acesso].alunos[opcao_edit].matricula == turmas[opcao_acesso].alunos[i].matricula) { 
+                            printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
+                            repetido = true; 
+                            break; 
+                        }
+                    }
+                    if (turmas[opcao_acesso].alunos[opcao_edit].matricula >= 1000000 || turmas[opcao_acesso].alunos[opcao_edit].matricula <= 99999) {
+                        printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
+                        irregular = true;
+                    }
+                } while (irregular == true || repetido == true);
                 printf("\nMatrícula alterada.\n");
                 break;
             case 3:
