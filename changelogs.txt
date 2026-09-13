@@ -89,3 +89,9 @@ gcc src/*.c -Iinclude -o sistema
 
 12/09/2026 (V 1.59):
 - Resolvido bug de comparação da matricula com ela mesma durante a edição
+
+13/09/2026: (V 1.6): 
+- Função de exclusão de alunos desenvolvida e testada
+
+Para o proximo dia:
+- Iniciar função de busca de alunos
