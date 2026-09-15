@@ -16,5 +16,6 @@ void listar_alunos(int opcao_acesso); //função para a listagem de todos os alu
 void editar_alunos(int opcao_acesso); //função para entrar na edição de alunos
 void dados_editar_aluno(int opcao_edit, int opcao_acesso); //função para decidir o que será editado do aluno (em breve terão as notas)
 void excluir_aluno(int opcao_acesso); //função para excluir alunos (rever la na frente para excluir as notas também)
+void buscar_aluno(int opcao_acesso); //função para buscar alunos
 
 #endif 

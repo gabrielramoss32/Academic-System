@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<ctype.h>
+#include<string.h>
 #include "cadastro_turma.h"
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
@@ -16,7 +18,7 @@ void menu_alunos (int opcao_acesso) {
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
         printf("[5] Listar alunos\n"); //pronto
-        printf("[6] Buscar aluno\n");
+        printf("[6] Buscar aluno\n"); //desenvolvendo
         printf("[7] Ver estatísticas da turma\n");
         printf("[8] Excluir aluno\n"); //pronto
         printf("[9] Voltar ao menu\n"); //pronto
@@ -44,7 +46,7 @@ void menu_alunos (int opcao_acesso) {
                 listar_alunos(opcao_acesso);
                 break;
             case 6:
-
+                buscar_aluno(opcao_acesso);
                 break;
             case 7:
 
@@ -88,7 +90,6 @@ void cadastro_alunos (int opcao_acesso) {
             printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
             irregular = true;
         }
-
     } while (irregular == true || repetido == true); //repete se a matricula nao tiver 6 digitos ou se for repetida
 
     printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
@@ -217,5 +218,42 @@ void excluir_aluno (int opcao_acesso) {
         } while (opcao < 0 || opcao > turmas[opcao_acesso].qtd_alunos);
     } else {
         printf("\nNão há aluno para ser excluído, cadastre um aluno.\n");
+    }
+}
+
+void buscar_aluno(int opcao_acesso) {
+    int opcao; //variável para decidir de qual forma o aluno será procurado
+    char aluno_buscado[100]; //representa o aluno que a pessoa está procurando
+    int matricula_buscada; //representa a matricula procurada
+    
+    printf("\n- Selecione como deseja procurar o aluno: \n");
+    printf("[1] Por matrícula\n");
+    printf("[2] Por nome\n");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+        case 1:
+            printf("\nDigite a matrícula do aluno que deseja procurar: \n");
+            scanf("%d", &matricula_buscada);
+            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+                if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) {
+                    printf("\nAluno encontrado: \n");
+                    printf("Nome: %s\n", turmas[opcao_acesso].alunos[i].nome);
+                    printf("Matrícula %d\n", turmas[opcao_acesso].alunos[i].matricula);
+                }
+            }
+            break;
+        case 2:
+
+            break;
+    }
+
+
+
+
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
+        for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //percorre cada caractere dos alunos na ordem
+            tolower(turmas[opcao_acesso].alunos[i].nome[j]); //deixa os nomes em minusculo
+        }
     }
 }
