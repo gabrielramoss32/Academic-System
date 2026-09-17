@@ -223,7 +223,6 @@ void excluir_aluno (int opcao_acesso) {
 
 void buscar_aluno(int opcao_acesso) {
     int opcao; //variável para decidir de qual forma o aluno será procurado
-    char aluno_buscado[100]; //representa o aluno que a pessoa está procurando
     int matricula_buscada; //representa a matricula procurada
     
     printf("\n- Selecione como deseja procurar o aluno: \n");
@@ -233,27 +232,58 @@ void buscar_aluno(int opcao_acesso) {
 
     switch (opcao) {
         case 1:
-            printf("\nDigite a matrícula do aluno que deseja procurar: \n");
+            printf("\nDigite a matrícula do aluno que deseja procurar: ");
             scanf("%d", &matricula_buscada);
             for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-                if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) {
-                    printf("\nAluno encontrado: \n");
-                    printf("Nome: %s\n", turmas[opcao_acesso].alunos[i].nome);
-                    printf("Matrícula %d\n", turmas[opcao_acesso].alunos[i].matricula);
+                if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula buscada com todas as matrículas registradas
+                    printf("\nAluno encontrado. \n");
+                    printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
+                    printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
+                } else {
+                    printf("\nAluno não encontrado, verifique o número de matrícula.\n");
                 }
             }
             break;
         case 2:
-
+            busca_por_nome(opcao_acesso);
             break;
     }
+}
 
+void busca_por_nome (int opcao_acesso) {
+    char nome_buscado[100]; //representa o aluno que a pessoa quer buscar
+    char nome_temporario[100]; //representa a cópia temporária que será usada para comparação
+    bool encontrado;
 
-
+    printf("\nDigite o nome do aluno que deseja procurar: ");
+    getchar();
+    fgets(nome_buscado, sizeof(nome_buscado), stdin);
+    for (int i = 0; i < strlen(nome_buscado); i++) {
+        nome_buscado[i] = tolower(nome_buscado[i]); //normaliza o nome buscado para ficar todo em minúsculo
+    }
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
-        for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //percorre cada caractere dos alunos na ordem
-            tolower(turmas[opcao_acesso].alunos[i].nome[j]); //deixa os nomes em minusculo
+        strcpy(nome_temporario, turmas[opcao_acesso].alunos[i].nome); //copia o nome do aluno atual para o nome temporário
+        for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //percorre cada caractere do nome do aluno
+            nome_temporario[j] = tolower(nome_temporario[j]); //normaliza o nome buscado para ficar todo em minúsculo
         }
+        if (strcmp(nome_buscado, nome_temporario) == 0) { //compara o nome do aluno com o aluno buscado
+            printf("\nAluno encontrado.\n");
+            printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
+            printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
+            printf("\nNOME TEMPORARIO: %s\n", nome_temporario);
+            printf("\nNOME BUSCADO: %s\n", nome_buscado);
+            encontrado = true;
+            goto destino; //pula diretamente para a linha 285 e sai dos laços
+        } else {
+            printf("\nNOME TEMPORARIO: %s\n", nome_temporario);
+            printf("\nNOME BUSCADO: %s\n", nome_buscado);
+            encontrado = false;
+        }
+    }
+
+    destino:
+    if (!encontrado) { //verifica se aquele aluno foi encontrado
+        printf("\nAluno não encontrado.\n");
     }
 }

@@ -93,5 +93,13 @@ gcc src/*.c -Iinclude -o sistema
 13/09/2026 (V 1.6): 
 - Função de exclusão de alunos desenvolvida e testada
 
-14/09/2025 (V 1.75):
+14/09/2026 (V 1.75):
 - Iniciada função de busca de alunos (por matricula)
+
+16/09/2026 (V 1.79):
+- Função de busca de alunos por nome pronta 
+
+Para o proximo dia:
+- Verificar a integridade da função
+- Verificar como normalizar nomes com acento
+- Verificar como buscar somente o nome principal e localizar o aluno
