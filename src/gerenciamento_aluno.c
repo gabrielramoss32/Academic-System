@@ -18,7 +18,7 @@ void menu_alunos (int opcao_acesso) {
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
         printf("[5] Listar alunos\n"); //pronto
-        printf("[6] Buscar aluno\n"); //desenvolvendo
+        printf("[6] Buscar aluno\n"); //pronto
         printf("[7] Ver estatísticas da turma\n");
         printf("[8] Excluir aluno\n"); //pronto
         printf("[9] Voltar ao menu\n"); //pronto
@@ -65,7 +65,7 @@ void menu_alunos (int opcao_acesso) {
 void cadastro_alunos (int opcao_acesso) {
     bool repetido, irregular; //variáveis que controlam a validação da matrícula
 
-    printf("Insira o nome do aluno: ");
+    printf("Insira o nome do aluno (priorize colocar nomes sem acento, pois a busca ignora acentos): ");
     getchar();
     fgets(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome,
     sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin); //registra o nome do aluno
