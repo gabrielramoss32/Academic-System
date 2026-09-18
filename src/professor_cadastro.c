@@ -3,7 +3,7 @@
 #include "cadastro_turma.h"
 
 Professor professor1 = {
-    .cadastrado = true //professor global definido como sem cadastro e variavel de professor declarada (pode ser alterado para fins de teste)
+    .cadastrado = false //professor global definido como sem cadastro e variavel de professor declarada (pode ser alterado para fins de teste)
 };
 
 void cadastro_professor () {

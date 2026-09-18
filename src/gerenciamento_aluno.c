@@ -271,13 +271,9 @@ void busca_por_nome (int opcao_acesso) {
             printf("\nAluno encontrado.\n");
             printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
             printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
-            printf("\nNOME TEMPORARIO: %s\n", nome_temporario);
-            printf("\nNOME BUSCADO: %s\n", nome_buscado);
             encontrado = true;
             goto destino; //pula diretamente para a linha 285 e sai dos laços
         } else {
-            printf("\nNOME TEMPORARIO: %s\n", nome_temporario);
-            printf("\nNOME BUSCADO: %s\n", nome_buscado);
             encontrado = false;
         }
     }
