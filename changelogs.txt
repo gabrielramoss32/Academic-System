@@ -99,7 +99,21 @@ gcc src/*.c -Iinclude -o sistema
 16/09/2026 (V 1.79):
 - Função de busca de alunos por nome pronta 
 
-Para o proximo dia:
+Para o próximo dia:
 - Verificar a integridade da função
 - Verificar como normalizar nomes com acento
 - Verificar como buscar somente o nome principal e localizar o aluno
+- Refatorar o gerenciamento de alunos
+
+→ Estado atual do projeto:
+>>> O sistema atualmente permite:
+- Cadastro como professor no sistema e verificações de cadastro;
+- Gerenciar turmas, tal como: cadastro, edição, acesso e exclusão;
+- Gerenciar alunos, como cadastro, edição, exclusão, busca e listagem;
+- Navegação fluída entre diferentes funcionalidades;
+- Código comentado e devidamente bem estruturado.
+
+→ Ainda em desenvolvimento:
+- Término da função de busca de alunos (ainda pode apresentar erros);
+- Funcionalidades envolvendo o gerenciamento das notas dos alunos;
+- Refatorações completas de diferentes funcionalidades do projeto.
