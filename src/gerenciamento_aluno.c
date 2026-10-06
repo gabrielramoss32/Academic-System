@@ -253,7 +253,7 @@ void buscar_aluno(int opcao_acesso) {
 void busca_por_nome (int opcao_acesso) {
     char nome_buscado[100]; //representa o aluno que a pessoa quer buscar
     char nome_temporario[100]; //representa a cópia temporária que será usada para comparação
-    bool encontrado;
+    bool encontrado = false; //variável booleana para controlar se a busca do aluno foi bem sucedida
 
     printf("\nDigite o nome do aluno que deseja procurar: ");
     getchar();
@@ -267,19 +267,16 @@ void busca_por_nome (int opcao_acesso) {
         for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //percorre cada caractere do nome do aluno
             nome_temporario[j] = tolower(nome_temporario[j]); //normaliza o nome buscado para ficar todo em minúsculo
         }
-        if (strcmp(nome_buscado, nome_temporario) == 0) { //compara o nome do aluno com o aluno buscado
-            printf("\nAluno encontrado.\n");
+        
+        if (strstr(nome_temporario, nome_buscado) != NULL) { //compara o nome inserido e verifica se há um nome igual
+            printf("\nAluno(os) encontrado(os).\n");
             printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
             printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
             encontrado = true;
-            goto destino; //pula diretamente para a linha 285 e sai dos laços
-        } else {
-            encontrado = false;
         }
     }
 
-    destino:
-    if (!encontrado) { //verifica se aquele aluno foi encontrado
+    if (!encontrado) { //verifica se tem algum aluno com aquele nome 
         printf("\nAluno não encontrado.\n");
     }
 }
