@@ -6,6 +6,8 @@
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
 
+bool função_primaria; //variável para controlar o acesso a função de verificação de matrícula
+
 void menu_alunos (int opcao_acesso) {
     int opcao;
     do {
@@ -223,7 +225,6 @@ void excluir_aluno (int opcao_acesso) {
 
 void buscar_aluno(int opcao_acesso) {
     int opcao; //variável para decidir de qual forma o aluno será procurado
-    int matricula_buscada; //representa a matricula procurada
     
     printf("\n- Selecione como deseja procurar o aluno: \n");
     printf("[1] Por matrícula\n");
@@ -232,21 +233,32 @@ void buscar_aluno(int opcao_acesso) {
 
     switch (opcao) {
         case 1:
-            printf("\nDigite a matrícula do aluno que deseja procurar: ");
-            scanf("%d", &matricula_buscada);
-            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-                if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula buscada com todas as matrículas registradas
-                    printf("\nAluno encontrado. \n");
-                    printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
-                    printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
-                } else {
-                    printf("\nAluno não encontrado, verifique o número de matrícula.\n");
-                }
-            }
+            busca_por_matricula(opcao_acesso);
             break;
         case 2:
             busca_por_nome(opcao_acesso);
             break;
+    }
+}
+
+void busca_por_matricula(int opcao_acesso) {
+    int matricula_buscada; //representa a matrícula procurada
+    bool encontrado = false; //variável para controlar a busca do aluno pela matrícula
+
+    printf("\nDigite a matrícula do aluno que deseja procurar: ");
+    scanf("%d", &matricula_buscada);
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula buscada com todas as matrículas registradas
+            printf("\nAluno encontrado. \n");
+            printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
+            printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\nAluno não encontrado.\n");
     }
 }
 
@@ -269,14 +281,14 @@ void busca_por_nome (int opcao_acesso) {
         }
         
         if (strstr(nome_temporario, nome_buscado) != NULL) { //compara o nome inserido e verifica se há um nome igual
-            printf("\nAluno(os) encontrado(os).\n");
+            printf("\nAluno encontrado.\n");
             printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
             printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
             encontrado = true;
         }
     }
 
-    if (!encontrado) { //verifica se tem algum aluno com aquele nome 
+    if (!encontrado) { //verifica se algum aluno com o nome buscado não foi encontrado
         printf("\nAluno não encontrado.\n");
     }
 }
