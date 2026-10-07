@@ -24,15 +24,15 @@ void cadastro_professor () {
     }
 
     printf("Digite o seu nome: ");
-    getchar(); //come o enter do buffer
+    getchar();
     fgets(professor1.nome, sizeof(professor1.nome), stdin);
 
     printf("Digite a sua formação: ");
-    getchar(); //come o enter do buffer
+    getchar();
     fgets(professor1.formacao, sizeof(professor1.formacao), stdin);
 
     printf("Digite o nome da escola em que você é professor: ");
-    getchar();  //come o enter do buffer
+    getchar();
     fgets(professor1.escola, sizeof(professor1.escola), stdin);
 
     printf("\nCadastro realizado! Seja bem-vindo %s", professor1.nome);

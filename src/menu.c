@@ -19,15 +19,15 @@ void menu_inicial () {
 
         switch (opcao) {
             case 1:
-                cadastro_professor(); //FUNÇÃO PRONTA E TESTADA
+                cadastro_professor();
                 break;
             case 2:
-                turma_cadastro(professor1.cadastrado); //FUNÇÃO PRONTA E TESTADA
+                turma_cadastro(professor1.cadastrado);
                 break;
             case 3:
                 printf("Obrigado por acessar o sistema.");
                 break;
-            default: //para numeros diferentes dos selecionados
+            default:
                 printf("Opção inválida, selecione uma opção existente.\n");
         }
     } while (opcao <= 0 || opcao > 3);

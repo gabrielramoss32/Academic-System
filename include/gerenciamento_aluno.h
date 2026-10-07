@@ -15,7 +15,7 @@ void cadastro_alunos(int opcao_acesso); //função para o cadastro dos alunos
 void listar_alunos(int opcao_acesso); //função para a listagem de todos os alunos daquela turma
 void editar_alunos(int opcao_acesso); //função para entrar na edição de alunos
 void dados_editar_aluno(int opcao_edit, int opcao_acesso); //função para decidir o que será editado do aluno (em breve terão as notas)
-bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula); //função para validar matrícula, usada na edição e no cadastro
+bool validar_matricula(int opcao_acesso, int indice_aluno, int matricula); //função para validar matrícula, usada na edição e no cadastro
 void excluir_aluno(int opcao_acesso); //função para excluir alunos (rever la na frente para excluir as notas também)
 void buscar_aluno(int opcao_acesso); //função para buscar alunos
 void busca_por_matricula(int opcao_acesso); //função para busca de aluno por matrícula

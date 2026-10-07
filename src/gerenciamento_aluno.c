@@ -6,8 +6,6 @@
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
 
-bool função_primaria; //variável para controlar o acesso a função de verificação de matrícula
-
 void menu_alunos (int opcao_acesso) {
     int opcao;
     do {
@@ -15,15 +13,15 @@ void menu_alunos (int opcao_acesso) {
         printf("\nTurma atual: %dº ano %c\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
         printf("Alunos: %d\n", turmas[opcao_acesso].qtd_alunos);
         printf("\n - Selecione a opção desejada:\n");
-        printf("[1] Cadastrar aluno\n"); //pronto
-        printf("[2] Editar aluno\n"); //pronto
+        printf("[1] Cadastrar aluno\n");
+        printf("[2] Editar aluno\n");
         printf("[3] Lançar notas\n");
         printf("[4] Ver boletim\n");
-        printf("[5] Listar alunos\n"); //pronto
-        printf("[6] Buscar aluno\n"); //pronto
+        printf("[5] Listar alunos\n");
+        printf("[6] Buscar aluno\n");
         printf("[7] Ver estatísticas da turma\n");
-        printf("[8] Excluir aluno\n"); //pronto
-        printf("[9] Voltar ao menu\n"); //pronto
+        printf("[8] Excluir aluno\n");
+        printf("[9] Voltar ao menu\n");
         printf("└─────────────────────────────────────┘\n");
         scanf("%d", &opcao);
         
@@ -70,14 +68,14 @@ void cadastro_alunos (int opcao_acesso) {
     printf("Insira o nome do aluno (priorize colocar nomes sem acento, pois a busca ignora acentos): ");
     getchar();
     fgets(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome,
-    sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin); //registra o nome do aluno
+    sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin);
 
     do {
         printf("Digite a matrícula do aluno (6 dígitos): ");
-        scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula); //registra a matriula do aluno
+        scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula);
     } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //repete se a matricula não tiver sido validada
 
-    printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
+    printf("\n - Aluno nº %d/%d cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1, MAX_ALUNOS);
     turmas[opcao_acesso].qtd_alunos++; //incrementação da quantidade de alunos registrados naquela turma
 }
 
@@ -88,7 +86,7 @@ void listar_alunos (int opcao_acesso) {
         printf("\n┌─────────────────────────────────────┐");
         printf("\nAlunos do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma); //mostra a turma em que os alunos serão listados
         for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-            printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula); //exibe o numero, nome e matricula do aluno
+            printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula);
         }
         printf("└─────────────────────────────────────┘\n");
     }
@@ -179,7 +177,6 @@ bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula)  {
 }
 
 void excluir_aluno (int opcao_acesso) {
-
     int opcao; //variável para decidir qual aluno será excluido
     char confirm; //variável de confirmação da exclusão
 
@@ -203,7 +200,7 @@ void excluir_aluno (int opcao_acesso) {
                         opcao++; //incrementa para deslocar os próximos alunos
                     }
                     turmas[opcao_acesso].qtd_alunos--; //retira uma quantidade de alunos cadastrados
-                    opcao = 0; //zera a variável da opção
+                    opcao = 0;
                     printf("\nExclusão bem sucedida, você retornará ao menu.\n");
                 } else {
                     printf("\nExclusão cancelada, você retornará ao menu.\n");

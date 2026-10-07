@@ -1,9 +1,9 @@
 #ifndef CADASTRO_TURMA_H
 #define CADASTRO_TURMA_H
 #define MAX_TURMAS 10 //Quantidade de turmas que pode ser registrado no sistema
+#define MAX_ALUNOS 35 //Quantidade de alunos que podem ser registrados
 #include<stdbool.h>
 #include "gerenciamento_aluno.h"
-#define MAX_ALUNOS 35 //Quantidade de alunos que podem ser registrados
 
 typedef struct {
     int serie;
@@ -15,7 +15,7 @@ typedef struct {
     int qtd_alunos; //variavel das quantidade de alunos das turmas
 } Turma; //struct com as informações da turma
 
-extern Turma turmas[MAX_TURMAS]; //define uma unica variável de turmas na memoria, localizada em
+extern Turma turmas[MAX_TURMAS]; //define uma unica variável de turmas na memoria
 extern int qtd_turmas; //variável para controlar o índice de turmas cadastradas
 extern bool acesso_menu; //variavel para controlar a repetição do menu de turma
 
