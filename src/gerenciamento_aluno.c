@@ -57,6 +57,7 @@ void menu_alunos (int opcao_acesso) {
                 excluir_aluno(opcao_acesso);
                 break; 
             case 9:
+             
                 break;
             default:
                 printf("\nOpção inválida, selecione uma opção existente.\n");         
@@ -65,7 +66,6 @@ void menu_alunos (int opcao_acesso) {
 }
 
 void cadastro_alunos (int opcao_acesso) {
-    bool repetido, irregular; //variáveis que controlam a validação da matrícula
 
     printf("Insira o nome do aluno (priorize colocar nomes sem acento, pois a busca ignora acentos): ");
     getchar();
@@ -73,26 +73,9 @@ void cadastro_alunos (int opcao_acesso) {
     sizeof(turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].nome), stdin); //registra o nome do aluno
 
     do {
-        repetido = false;
-        irregular = false;
         printf("Digite a matrícula do aluno (6 dígitos): ");
         scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula); //registra a matriula do aluno
-
-        for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos registrados
-            if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula == 
-            turmas[opcao_acesso].alunos[i].matricula) { //verifica se aquele numero de matricula ja foi registrado
-                printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
-                repetido = true; //confirma que o ultimo numero de matricula registrado foi repetido
-                break; //sai do laço caso seja encontrado um valor repetido
-            } //se nao encontrar matricula repetida, a variavel registradora continua como false
-        }
-
-        if (turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula >= 1000000 //verifica se a matricula tem 6 dígitos
-        || turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula <= 99999) {
-            printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
-            irregular = true;
-        }
-    } while (irregular == true || repetido == true); //repete se a matricula nao tiver 6 digitos ou se for repetida
+    } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //repete se a matricula não tiver sido validada
 
     printf("\n - Aluno nº %d/35 cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1); //avisa que o aluno foi cadastrado
     turmas[opcao_acesso].qtd_alunos++; //incrementação da quantidade de alunos registrados naquela turma
@@ -153,27 +136,10 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
                 printf("\nNome alterado.\n");
                 break;
             case 2:
-                bool repetido, irregular;
                 do {
-                    repetido = false;
-                    irregular = false;
                     printf("Digite a nova matrícula do aluno (6 dígitos): ");
                     scanf("%d", &turmas[opcao_acesso].alunos[opcao_edit].matricula); 
-                    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { 
-                        if (i == opcao_edit) { //evita de comparar a matricula com ela mesma e pula o laço
-                            continue;
-                        }
-                        if (turmas[opcao_acesso].alunos[opcao_edit].matricula == turmas[opcao_acesso].alunos[i].matricula) { 
-                            printf("\nNúmero de matrícula já registrado anteriormente, insira um número disponível.\n");
-                            repetido = true; 
-                            break; 
-                        }
-                    }
-                    if (turmas[opcao_acesso].alunos[opcao_edit].matricula >= 1000000 || turmas[opcao_acesso].alunos[opcao_edit].matricula <= 99999) {
-                        printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
-                        irregular = true;
-                    }
-                } while (irregular == true || repetido == true);
+                } while (!validar_matricula(opcao_acesso, opcao_edit, turmas[opcao_acesso].alunos[opcao_edit].matricula)); //repete se a matrícula não for validada
                 printf("\nMatrícula alterada.\n");
                 break;
             case 3:
@@ -182,6 +148,34 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
                 printf("Opção inválida, selecione uma opção existente.");
         }
     } while (opcao != 3); //repete enquanto o usuario nao quiser sair
+}
+
+bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula)  {
+    //Índice_aluno é referente ao que receberá do cadastro (-1) já que nenhum aluno será editado ou ignorado do cadastro
+    bool repetido = false, irregular = false;
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        if (i == indice_aluno) {
+            continue; //evita de comparar a matrícula com ela mesma e pula para a próxima iteração
+        }
+
+        if (matricula == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula com as que já foram registradas
+            printf("\nNúmero de matrícula já registrado, insira um número disponível.\n");
+            repetido = true;
+            break;
+        }
+
+    }
+
+    if (matricula >= 1000000 || matricula <= 99999) { //verifica se a matrícula tem 6 dígitos
+        printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
+        irregular = true;
+    }
+
+    if (repetido == true || irregular == true) {
+        return false; //retorna falso se a matrícula estiver incorreta
+    } else {
+        return true; //retorna verdadeiro se a matrícula estiver correta
+    }
 }
 
 void excluir_aluno (int opcao_acesso) {

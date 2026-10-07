@@ -102,15 +102,15 @@ gcc src/*.c -Iinclude -o sistema
 Para o próximo dia:
 - Refatorar o gerenciamento de alunos
 
-06/10/2026: (V 1.8):
+06/10/2026 (V 1.8):
 - Adicionado README.md ao repositório local
 - Função de busca permitindo um único nome e localizando vários alunos
 
-07/10/2026: (V 1.85):
+07/10/2026 (V 1.85):
 - Refatoração do gerenciamento de alunos
 - Índices de limite de cadastro de alunos corrigidos
 - Função criada exclusivamente para a busca de alunos por matrícula
 - Problema de repetição com a variável booleana da busca por matricula corrigido
 
-Para o proximo dia:
-- Implantar a refatoração nº5
+07/10/2026 (V 1.89):
+- Adicionada função de validação de matrículas para cadastro e edição
