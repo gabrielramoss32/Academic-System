@@ -11,8 +11,11 @@ typedef struct {
     char turno[15];
     char disciplina[40];
 
-    Aluno alunos[MAX_ALUNOS]; //Vetor com os alunos, cada turma podera ter ate 35 alunos
-    int qtd_alunos; //variavel das quantidade de alunos das turmas
+    Aluno alunos[MAX_ALUNOS]; //vetor com os alunos, cada turma poderá ter ate 35 alunos
+    int qtd_alunos; //variável das quantidades de alunos das turmas
+    int qtd_avaliacoes; //variável das quantidades de avaliação de cada turma
+    char nome_notas[MAX_AVALIACOES][35]; //vetor referente ao modelo de cada avaliação (trabalho, prova, etc)
+    float valor_notas[MAX_AVALIACOES]; //variável referente ao valor de cada avaliação
 } Turma; //struct com as informações da turma
 
 extern Turma turmas[MAX_TURMAS]; //define uma unica variável de turmas na memoria

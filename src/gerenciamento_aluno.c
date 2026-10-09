@@ -5,6 +5,7 @@
 #include "cadastro_turma.h"
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
+#include "gerenciamento_avaliacoes.h"
 
 void menu_alunos (int opcao_acesso) {
     int opcao;
@@ -21,7 +22,8 @@ void menu_alunos (int opcao_acesso) {
         printf("[6] Buscar aluno\n");
         printf("[7] Ver estatísticas da turma\n");
         printf("[8] Excluir aluno\n");
-        printf("[9] Voltar ao menu\n");
+        printf("[9] Definir ou editar avaliações\n");
+        printf("[10] Voltar ao menu\n");
         printf("└─────────────────────────────────────┘\n");
         scanf("%d", &opcao);
         
@@ -55,12 +57,14 @@ void menu_alunos (int opcao_acesso) {
                 excluir_aluno(opcao_acesso);
                 break; 
             case 9:
-             
+                acessar_avaliacoes(opcao_acesso);
+                break;
+            case 10:
                 break;
             default:
                 printf("\nOpção inválida, selecione uma opção existente.\n");         
         }
-    } while (opcao != 9); //repete o menu ate o usuario querer sair
+    } while (opcao != 10); //repete o menu ate o usuario querer sair
 }
 
 void cadastro_alunos (int opcao_acesso) {
