@@ -114,6 +114,11 @@ gcc src/*.c -Iinclude -o sistema
 - "pente fino" da refatoração
 - Merge no main
 
-Para o proximo dia:
-- Iniciar a modularização das notas
-- Definir métodos avaliativos
+08-09/10/2026 (V 2.0):
+- Definida estrutura inicial do gerenciamento de notas
+- Iniciada a função de cadastro dos métodos avaliativos
+- Criada função de definir avaliações, com controle de cadastro com vetor boooleano
+
+Próximos passos:
+- Testar o controle de acesso à listagem
+- Criar função de editar avaliações
