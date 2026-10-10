@@ -23,7 +23,7 @@ void acessar_avaliacoes(int opcao_acesso) {
                 definir_avaliacoes(opcao_acesso);
                 break;
             case 2:
-                editar_avaliacoes(opcao_acesso);
+                editar_avaliacoes(opcao_acesso, av_cadastrada);
                 break;
             case 3:
                 listar_avaliacoes(opcao_acesso, av_cadastrada);
@@ -37,7 +37,7 @@ void acessar_avaliacoes(int opcao_acesso) {
 }
 
 void definir_avaliacoes(int opcao_acesso) {
-    float soma_avaliacoes = 0; //variável da soma das notas, DEVE ser == 10
+    float soma_avaliacoes; //variável da soma das notas, DEVE ser == 10
 
     printf("\nRegras de avaliações:\n");
     printf("1. Só são permitidas cadastrar até %d avaliações;\n", MAX_AVALIACOES);
@@ -64,14 +64,64 @@ void definir_avaliacoes(int opcao_acesso) {
         }
 
         if (soma_avaliacoes != 10.0) {
-            printf("\nA soma das avaliações atingiu a pontuação de %.2f, preencha novamente com os valores corretos para atingir 10 pontos.\n", soma_avaliacoes);
+            printf("\n - A soma das avaliações atingiu a pontuação de %.2f, preencha novamente com os valores corretos para atingir 10 pontos.\n", soma_avaliacoes);
+            soma_avaliacoes = 0; //reseta a soma das avaliações se não atingir 10
         }
     } while (soma_avaliacoes != 10.0); //repete o menu se a soma for diferente dos 10 pontos
     printf("\nAvaliações cadastradas com sucesso.\n");
     av_cadastrada[opcao_acesso] = true; //a turma selecionada recebe que as avaliações foram cadastradas
 }
 
-void editar_avaliacoes(int opcao_acesso) {
+void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
+    int opcao;
+
+    if (av_cadastrada[opcao_acesso] == true) {
+        do {
+            printf("\n - Selecione o que deseja editar:\n");
+            printf("[1] Nome de avaliação\n");
+            printf("[2] Nota de avaliação\n");
+            printf("[3] Voltar ao menu\n");
+            scanf("%d", &opcao);
+
+            switch (opcao) {
+                case 1: 
+                    editar_nome_avaliacao(opcao_acesso);
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    break;
+                default:
+                    printf("\nSelecione uma opção existente.\n");
+                }
+        } while (opcao != 3);
+    } else {
+        printf("\nNão há avaliações para editar nessa turma.\n");
+    }
+}
+
+void editar_nome_avaliacao (int opcao_acesso) {
+    int opcao_edit;
+
+    do {
+        printf("\n - Digite o número da avaliação que deseja editar:\n");
+        for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
+            printf("[%d] %s\n", i, turmas[opcao_acesso].nome_notas[i]);
+        }
+        scanf("%d", opcao_edit);
+        if (opcao_edit >= 0 && opcao_edit < turmas[opcao_acesso].qtd_avaliacoes) {
+            printf("\nDigite o novo nome da avaliação: ");
+            getchar();
+            fgets(turmas[opcao_acesso].nome_notas[opcao_edit], sizeof(turmas[opcao_acesso].nome_notas[opcao_edit]), stdin);
+            printf("Nome da avaliação alterado.\n");
+        } else {
+            printf("\nNúmero inválido, selecione um número correto.\n");
+        }
+    } while (opcao_edit < 0 || opcao_edit >= turmas[opcao_acesso].qtd_avaliacoes); //repete o menu se o número da avaliação for inválido
+}
+
+void editar_nota_avaliacao (int opcao_acesso) {
 
 }
 
@@ -81,9 +131,9 @@ void listar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
         printf("\n - Avaliações do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
         for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
             printf("Nome da avaliação nº %d: %s\n", i+1, turmas[opcao_acesso].nome_notas[i]);
-            printf("Valor: %.2f\n", turmas[opcao_acesso].valor_notas[i]);
+            printf("> Valor: %.2f\n", turmas[opcao_acesso].valor_notas[i]);
         }  
     } else {
-        printf("\nNão há avaliações cadastradas para esta turma.\n");
+        printf("\nNão há avaliações cadastradas para esta turma, cadastre.\n");
     }
 }

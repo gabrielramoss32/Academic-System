@@ -22,7 +22,7 @@ void menu_alunos (int opcao_acesso) {
         printf("[6] Buscar aluno\n");
         printf("[7] Ver estatísticas da turma\n");
         printf("[8] Excluir aluno\n");
-        printf("[9] Definir ou editar avaliações\n");
+        printf("[9] Menu de avaliações\n");
         printf("[10] Voltar ao menu\n");
         printf("└─────────────────────────────────────┘\n");
         scanf("%d", &opcao);
