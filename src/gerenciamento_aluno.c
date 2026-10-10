@@ -221,9 +221,11 @@ void excluir_aluno (int opcao_acesso) {
 void buscar_aluno(int opcao_acesso) {
     int opcao; //variável para decidir de qual forma o aluno será procurado
     
+    printf("\n┌─────────────────────────────────────┐");
     printf("\n- Selecione como deseja procurar o aluno: \n");
     printf("[1] Por matrícula\n");
     printf("[2] Por nome\n");
+    printf("└─────────────────────────────────────┘\n");
     scanf("%d", &opcao);
 
     switch (opcao) {

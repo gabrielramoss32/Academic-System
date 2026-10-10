@@ -109,11 +109,12 @@ void editar_nome_avaliacao (int opcao_acesso) {
         for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
             printf("[%d] %s\n", i, turmas[opcao_acesso].nome_notas[i]);
         }
-        scanf("%d", opcao_edit);
+        scanf("%d", &opcao_edit);
         if (opcao_edit >= 0 && opcao_edit < turmas[opcao_acesso].qtd_avaliacoes) {
             printf("\nDigite o novo nome da avaliação: ");
             getchar();
             fgets(turmas[opcao_acesso].nome_notas[opcao_edit], sizeof(turmas[opcao_acesso].nome_notas[opcao_edit]), stdin);
+            turmas[opcao_acesso].nome_notas[opcao_edit][strcspn(turmas[opcao_acesso].nome_notas[opcao_edit], "\n")] = '\0'; //consome a quebra de linha
             printf("Nome da avaliação alterado.\n");
         } else {
             printf("\nNúmero inválido, selecione um número correto.\n");
@@ -128,7 +129,7 @@ void editar_nota_avaliacao (int opcao_acesso) {
 void listar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
 
     if (av_cadastrada[opcao_acesso]) { //só lista se naquela turma, a avaliação foi cadastrada
-        printf("\n - Avaliações do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
+        printf("\n- Avaliações do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);
         for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
             printf("Nome da avaliação nº %d: %s\n", i+1, turmas[opcao_acesso].nome_notas[i]);
             printf("> Valor: %.2f\n", turmas[opcao_acesso].valor_notas[i]);
