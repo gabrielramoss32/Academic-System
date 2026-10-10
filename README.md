@@ -8,16 +8,15 @@ O sistema simula o gerenciamento de turmas e alunos por um professor. Este proje
 
 - Cadastro de professor, com validação de ID e idade;
 - Gerenciamento de turmas: cadastro, edição, acesso e exclusão;
-- Gerenciamento de alunos por turma: cadastro, edição, listagem e exclusão;
-- Busca de aluno por matrícula ou por nome;
+- Gerenciamento de alunos por turma: cadastro, edição, listagem, busca e exclusão;
 - Validação de matrícula com seis dígitos e prevenção de matrículas duplicadas na mesma turma.
 
 ## ❗ Limites atuais
 
 - Até 10 turmas e 35 alunos por turma;
 - Os dados ficam apenas na memória durante a execução: ao encerrar o programa, eles não são salvos;
-- A busca de alunos ainda está sendo revisada, especialmente para nomes com acentos e buscas por parte do nome;
-- As opções de notas, boletim e estatísticas já aparecem no menu, mas ainda não foram implementadas.
+- As opções de notas, boletim e estatísticas já aparecem no menu, mas ainda não foram implementadas;
+- Falta de tratamento de erros para entradas inválidas
 
 ## 💻 Requisitos
 
@@ -96,10 +95,10 @@ Siga as opções apresentadas no terminal. Para explorar o gerenciamento de alun
 
 ```text
 Academic-System/
-├── include/             # Arquivos de cabeçalho e estruturas do sistema
+├── include/             # Arquivos de cabeçalho e structs do sistema
 ├── src/                 # Implementação dos menus e funcionalidades
 ├── changelogs.txt       # Histórico autoritativo do projeto
-└── README.md
+└── README.md            # Documentação geral do projeto
 ```
 
 ## 📆 Estado do projeto

@@ -117,8 +117,11 @@ gcc src/*.c -Iinclude -o sistema
 08-09/10/2026 (V 2.0):
 - Definida estrutura inicial do gerenciamento de notas
 - Iniciada a função de cadastro dos métodos avaliativos
-- Criada função de definir avaliações, com controle de cadastro com vetor boooleano
+- Criada função de definir avaliações, com controle de cadastro com vetor boooleano (av_cadastrada[opcao_acesso])
+- Função de listagem de avaliações para cada turma
+- Função de edição do nome da avaliação
 
 Próximos passos:
-- Testar o controle de acesso à listagem
-- Criar função de editar avaliações
+- Resolver bug de entrada inválida da edição de nome da avaliação
+- Testar mais casos de edição (de nome e notas)
+- Fazer a função de edição de notas da avaliação
