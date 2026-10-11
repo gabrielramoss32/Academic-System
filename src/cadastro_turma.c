@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "professor_cadastro.h"
 #include "gerenciamento_turma.h"
+#include "gerenciamento_avaliacoes.h"
 
 Turma turmas[MAX_TURMAS]; //Variável turmas, declarada pelo typedef da struct turma
 int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas;
@@ -30,6 +31,7 @@ void turma_cadastro (bool professor1_cadastrado) {
 
         printf("\n- Turma nº %d/%d cadastrada, selecione a próxima opção: \n", qtd_turmas + 1, MAX_TURMAS);
         turmas[qtd_turmas].qtd_alunos = 0; //zera ou define a quantidade de alunos daquela turma como zero
+        av_cadastrada[qtd_turmas] = false; //define como false que aquela turma teve avaliação cadastrada (impede de acessar as avaliações de uma turma que foi excluída)
         qtd_turmas++; //Incrementação da quantidade de turma atual
         if (acesso_menu) { //chama esse menu somente uma vez
             acesso_menu = false; //fecha qualquer possibilidade de abrir o menu novamente

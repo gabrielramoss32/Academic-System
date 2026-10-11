@@ -16,7 +16,8 @@ typedef struct {
     int qtd_avaliacoes; //variável das quantidades de avaliação de cada turma
     char nome_notas[MAX_AVALIACOES][35]; //vetor referente ao modelo de cada avaliação (trabalho, prova, etc)
     float valor_notas[MAX_AVALIACOES]; //variável referente ao valor de cada avaliação
-} Turma; //struct com as informações da turma
+    float media; //variável referente à média de cada turma
+} Turma;
 
 extern Turma turmas[MAX_TURMAS]; //define uma unica variável de turmas na memoria
 extern int qtd_turmas; //variável para controlar o índice de turmas cadastradas

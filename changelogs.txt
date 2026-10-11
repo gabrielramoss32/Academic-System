@@ -121,7 +121,10 @@ gcc src/*.c -Iinclude -o sistema
 - Função de listagem de avaliações para cada turma
 - Função de edição do nome da avaliação
 
-Próximos passos:
-- Resolver bug de entrada inválida da edição de nome da avaliação
-- Testar mais casos de edição (de nome e notas)
-- Fazer a função de edição de notas da avaliação
+10/10/2026 (V 2.0):
+- Resolvido bug de entrada inválida e formatação após edição do nome
+- Adicionada função de edição da nota da avaliação
+- Cálculo e edição de médias
+
+Resolver até hoje:
+- Verificar se há problema em deixar as avaliações cadastradas de uma turma que ja foi excluida, sendo que a variavel booleana impede o acesso
