@@ -37,20 +37,23 @@ void acessar_avaliacoes(int opcao_acesso) {
 }
 
 void definir_avaliacoes(int opcao_acesso) {
-    float soma_avaliacoes; //variável da soma das notas, DEVE ser == 10
+    float soma_avaliacoes = 0.0; //variável da soma das notas, DEVE ser == 10
 
     printf("\nRegras de avaliações:\n");
     printf("1. Só são permitidas cadastrar até %d avaliações;\n", MAX_AVALIACOES);
     printf("2. A soma de todas as avaliações deve ser igual a 10 pontos;\n");
     printf("3. Defina um nome para cada avaliação;\n");
-    printf("4. Notas com partes fracionárias devem ser separadas com ponto ao invés de vírgula.\n");
+    printf("4. Notas com partes fracionárias devem ser separadas com ponto ao invés de vírgula;\n");
+    printf("5. A nota de cada avaliação deve ser maior que 0 e menor que 10.\n");
     do {
         printf("\n- Defina quantas avaliações a turma terá: ");
         scanf("%d", &turmas[opcao_acesso].qtd_avaliacoes); //irá registrar quantas avaliações aquela turma irá possuir
-        if (turmas[opcao_acesso].qtd_avaliacoes < 1 || turmas[opcao_acesso].qtd_avaliacoes > 5) {
+
+        if (turmas[opcao_acesso].qtd_avaliacoes < 1 || turmas[opcao_acesso].qtd_avaliacoes > MAX_AVALIACOES) {
             printf("Quantidade de avaliações inválidas, insira uma quantidade válida.\n");
         }
-    } while (turmas[opcao_acesso].qtd_avaliacoes < 1 || turmas[opcao_acesso].qtd_avaliacoes > 5); //repete o menu se a quantidade for inválida
+
+    } while (turmas[opcao_acesso].qtd_avaliacoes < 1 || turmas[opcao_acesso].qtd_avaliacoes > MAX_AVALIACOES); //repete o menu se a quantidade for inválida
 
     do {
         for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) { //percorre as avaliações e coleta nome e valor
@@ -59,8 +62,15 @@ void definir_avaliacoes(int opcao_acesso) {
             getchar();
             fgets(turmas[opcao_acesso].nome_notas[i], sizeof(turmas[opcao_acesso].nome_notas[i]), stdin);
             turmas[opcao_acesso].nome_notas[i][strcspn(turmas[opcao_acesso].nome_notas[i], "\n")] = '\0'; //remove a quebra de linha após o fgets 
-            printf("Digite o valor de %s: ", turmas[opcao_acesso].nome_notas[i]);
-            scanf("%f", &turmas[opcao_acesso].valor_notas[i]);
+            do {
+                printf("Digite o valor de %s: ", turmas[opcao_acesso].nome_notas[i]);
+                scanf("%f", &turmas[opcao_acesso].valor_notas[i]);
+
+                if (turmas[opcao_acesso].valor_notas[i] <= 0.0 || turmas[opcao_acesso].valor_notas[i] > 10.0) {
+                    printf("Valor da nota inválida, ela deve ser maior que 0 e menor que 10.\n");
+                }
+
+            } while (turmas[opcao_acesso].valor_notas[i] <= 0.0 || turmas[opcao_acesso].valor_notas[i] > 10.0);
             soma_avaliacoes += turmas[opcao_acesso].valor_notas[i]; //coleta e soma todas as notas
         }
 
@@ -102,13 +112,15 @@ void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
                     editar_nota_avaliacao(opcao_acesso);
                     break;
                 case 3:
-                    printf("\n - Digite a nova média da turma: ");
-                    scanf("%f", &turmas[opcao_acesso].media);
-                    if (turmas[opcao_acesso].media <= 0.0 || turmas[opcao_acesso].media >= 10.0) {
-                        printf("\nA média da turma deve ser maior que 0 e menor que 10.\n");
-                    } else {
-                        printf("\nMédia editada com sucesso.\n");
-                    }
+                    do {
+                        printf("\n - Digite a nova média da turma: ");
+                        scanf("%f", &turmas[opcao_acesso].media);
+                        if (turmas[opcao_acesso].media <= 0.0 || turmas[opcao_acesso].media >= 10.0) {
+                            printf("\nA média da turma deve ser maior que 0 e menor que 10.\n");
+                        } else {
+                            printf("\nMédia editada com sucesso.\n");
+                        }
+                    } while (turmas[opcao_acesso].media <= 0.0 || turmas[opcao_acesso].media >= 10.0);
                     break;
                 case 4:
                     break;
@@ -144,7 +156,7 @@ void editar_nome_avaliacao (int opcao_acesso) {
 
 void editar_nota_avaliacao (int opcao_acesso) {
     int opcao_edit;
-    float soma_avaliacoes = 0, diferenca = 0;
+    float soma_avaliacoes = 0.0, diferenca = 0.0;
 
     do {
         do {
@@ -154,12 +166,19 @@ void editar_nota_avaliacao (int opcao_acesso) {
                 soma_avaliacoes += turmas[opcao_acesso].valor_notas[i];
             }
             scanf("%d", &opcao_edit);
-            diferenca = soma_avaliacoes - turmas[opcao_acesso].valor_notas[opcao_edit]; //é calculado a nova soma de notas, removendo aquela que o valor será alterado
 
             if (opcao_edit >= 0 && opcao_edit < turmas[opcao_acesso].qtd_avaliacoes) {
+                diferenca = soma_avaliacoes - turmas[opcao_acesso].valor_notas[opcao_edit]; //é calculado a nova soma de notas, removendo aquela que o valor será alterado
                 printf("\nSoma das notas: %.2f\n", diferenca);
-                printf("\nDigite a nova nota da avaliação: ");
-                scanf("%f", &turmas[opcao_acesso].valor_notas[opcao_edit]);
+                do {
+                    printf("\nDigite a nova nota da avaliação: ");
+                    scanf("%f", &turmas[opcao_acesso].valor_notas[opcao_edit]);
+
+                    if (turmas[opcao_acesso].valor_notas[opcao_edit] <= 0.0 || turmas[opcao_acesso].valor_notas[opcao_edit] > 10.0) {
+                        printf("Valor da nota inválida, ela deve ser maior que 0 e menor que 10.\n");
+                    }
+
+                } while (turmas[opcao_acesso].valor_notas[opcao_edit] <= 0.0 || turmas[opcao_acesso].valor_notas[opcao_edit] > 10.0);
                 diferenca += turmas[opcao_acesso].valor_notas[opcao_edit]; //é calculada a nova soma das notas
             } else {
                 printf("\nNúmero inválido, selecione um número correto.\n");

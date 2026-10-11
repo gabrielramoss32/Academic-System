@@ -126,5 +126,11 @@ gcc src/*.c -Iinclude -o sistema
 - Adicionada função de edição da nota da avaliação
 - Cálculo e edição de médias
 
-Resolver até hoje:
-- Verificar se há problema em deixar as avaliações cadastradas de uma turma que ja foi excluida, sendo que a variavel booleana impede o acesso
+11/10/2026 (V 2.1):
+- Refatoração geral do gerenciamento de avaliações
+- Variáveis acumuladoras de notas inicializadas
+- Substituídas números fixos pelas definições constantes
+- Notas de avaliações possuem agora validação de notas, proibindo notaa <= 0 ou > 10 (pode sim ser cadastrada uma única avaliação valendo 10)
+- Adicionada repetição na edição de média, caso ela seja inválida
+- Corrigido uso de índice inválido antes da validação de editar notas
+- Vetor boooleano de validação e qtd.avaliacoes agora acompanham o fluxo de exclusão de turmas

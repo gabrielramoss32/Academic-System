@@ -2,6 +2,7 @@
 #include "cadastro_turma.h"
 #include "gerenciamento_turma.h"
 #include "gerenciamento_aluno.h"
+#include "gerenciamento_avaliacoes.h"
 
 void acessar_turma () {
     int opcao_acesso; //Variavel para controlar o acesso das turmas
@@ -123,6 +124,8 @@ void excluir_turma() {
                 if (confirm == 'S' || confirm == 's') {
                     for (int i = 0; i < qtd_turmas - opcao - 1; i++) { //desloca apenas a quantidade de turmas que tem para deslocar
                         turmas[opcao] = turmas[opcao + 1]; 
+                        av_cadastrada[opcao] = av_cadastrada[opcao + 1];
+                        turmas[opcao].qtd_avaliacoes = turmas[opcao + 1].qtd_avaliacoes;
                         opcao++; //incrementa para fazer isso com a próxima turma
                     }
                     qtd_turmas--; //retira uma quantidade de turma cadastrada
