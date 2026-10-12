@@ -44,7 +44,7 @@ void definir_avaliacoes(int opcao_acesso) {
     printf("2. A soma de todas as avaliações deve ser igual a 10 pontos;\n");
     printf("3. Defina um nome para cada avaliação;\n");
     printf("4. Notas com partes fracionárias devem ser separadas com ponto ao invés de vírgula;\n");
-    printf("5. A nota de cada avaliação deve ser maior que 0 e menor que 10.\n");
+    printf("5. A nota de cada avaliação deve ser maior que 0 e menor ou igual a 10, se for só uma avaliação.\n");
     do {
         printf("\n- Defina quantas avaliações a turma terá: ");
         scanf("%d", &turmas[opcao_acesso].qtd_avaliacoes); //irá registrar quantas avaliações aquela turma irá possuir

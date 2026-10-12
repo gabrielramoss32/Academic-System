@@ -6,6 +6,7 @@
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_turma.h"
 #include "gerenciamento_avaliacoes.h"
+#include "gerenciamento_notas.h"
 
 void menu_alunos (int opcao_acesso) {
     int opcao;
@@ -39,7 +40,7 @@ void menu_alunos (int opcao_acesso) {
                 editar_alunos(opcao_acesso);
                 break;
             case 3:
-
+                lancar_notas(opcao_acesso, av_cadastrada);
                 break;
             case 4:
 

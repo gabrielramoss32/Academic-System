@@ -134,3 +134,7 @@ gcc src/*.c -Iinclude -o sistema
 - Adicionada repetição na edição de média, caso ela seja inválida
 - Corrigido uso de índice inválido antes da validação de editar notas
 - Vetor boooleano de validação e qtd.avaliacoes agora acompanham o fluxo de exclusão de turmas
+- Merge no main
+
+12/10/2026 (V 2.2):
+- Adicionada função de lançamento e preenchimento de notas
