@@ -43,7 +43,7 @@ void menu_alunos (int opcao_acesso) {
                 lancar_notas(opcao_acesso, av_cadastrada);
                 break;
             case 4:
-
+                ver_boletim(opcao_acesso);
                 break;
             case 5:
                 listar_alunos(opcao_acesso);

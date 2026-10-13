@@ -138,3 +138,7 @@ gcc src/*.c -Iinclude -o sistema
 
 12/10/2026 (V 2.2):
 - Adicionada função de lançamento e preenchimento de notas
+
+12/10/2026 (V 2.3):
+- Adicionada função de ver boletim do aluno (carece de testes ainda)
+- Há bugs presentes

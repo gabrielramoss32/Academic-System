@@ -20,7 +20,7 @@ void lancar_notas (int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
             if (opcao_nota >= 0 && opcao_nota < turmas[opcao_acesso].qtd_alunos) {
                 preencher_notas(opcao_acesso, opcao_nota);
             } else {
-                printf("\nOpção inválida, selecione um aluno existente");
+                printf("\nOpção inválida, selecione um aluno existente.");
             }
         } while (opcao_nota < 0 || opcao_nota >= turmas[opcao_acesso].qtd_alunos); 
     } else {
@@ -33,6 +33,7 @@ void preencher_notas(int opcao_acesso, int opcao_nota) {
     printf("\n- Insira as notas de %s", turmas[opcao_acesso].alunos[opcao_nota].nome);
     printf("Certifique-se que a nota esteja entre 0 e o valor da avaliação.\n");
 
+    turmas[opcao_acesso].alunos[opcao_nota].boletim_disponivel = false;
     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
         do {
             printf("\nInsira a nota de: %s [%.2f]: ", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].valor_notas[i]);
@@ -45,5 +46,51 @@ void preencher_notas(int opcao_acesso, int opcao_nota) {
         } while (turmas[opcao_acesso].alunos[opcao_nota].notas[i] < 0 || 
         turmas[opcao_acesso].alunos[opcao_nota].notas[i] > turmas[opcao_acesso].valor_notas[i]); //repete o menu se a nota for inválida (< 0 ou > do que o valor daquela avaliação)
     }
+    turmas[opcao_acesso].alunos[opcao_nota].boletim_disponivel = true;
     printf("\n> Notas lançadas, confira o boletim do aluno e lance novamente as notas se quiser editar alguma nota.\n");
-} 
+}
+
+void ver_boletim (int opcao_acesso) {
+    int opcao = 0;
+    float media = 0;
+    do {
+        if (turmas[opcao_acesso].qtd_alunos > 0) {
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Digite o número do aluno que deseja ver o boletim:\n");
+            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+                printf("[%d] %s", i, turmas[opcao_acesso].alunos[i].nome);
+            }
+            printf("└─────────────────────────────────────┘\n");
+            scanf("%d", &opcao);
+
+            if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) {
+
+                if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true) {
+                    printf("\n- Boletim de %s\n", turmas[opcao_acesso].alunos[opcao].nome);
+                    for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
+                        printf("%s - Nota: %.2f/%2.f\n", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].alunos[opcao].notas[i], turmas[opcao_acesso].valor_notas[i]);
+                        media += turmas[opcao_acesso].alunos[opcao].notas[i]; //acumula a soma do aluno
+                    }
+
+                    media = media / turmas[opcao_acesso].qtd_avaliacoes; //divide a soma do aluno pela quantidade de avaliações
+                    printf("Média: %.2f\n", media);
+
+                    if (media >= turmas[opcao_acesso].media) {
+                        printf("Status: aprovado\n"); 
+                    } else {
+                        printf("Status: reprovado\n");
+                    }
+
+                } else {
+                    printf("\nNão foi possível consultar o boletim, verifique se o aluno teve suas notas lançadas.\n");
+                }
+
+            } else {
+                printf("\nOpção inválida, selecione um aluno existente.");
+            }
+
+        } else {
+            printf("\nNão há alunos cadastrados nessa turma.\n");
+        }
+    } while (opcao < 0 || opcao >= turmas[opcao_acesso].qtd_alunos);
+}
