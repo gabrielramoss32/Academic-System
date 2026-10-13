@@ -51,10 +51,11 @@ void preencher_notas(int opcao_acesso, int opcao_nota) {
 }
 
 void ver_boletim (int opcao_acesso) {
-    int opcao = 0;
+    int opcao;
     float media = 0;
-    do {
-        if (turmas[opcao_acesso].qtd_alunos > 0) {
+    if (turmas[opcao_acesso].qtd_alunos > 0) {
+
+        do {
             printf("\n┌─────────────────────────────────────┐\n");
             printf("- Digite o número do aluno que deseja ver o boletim:\n");
             for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
@@ -65,32 +66,34 @@ void ver_boletim (int opcao_acesso) {
 
             if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) {
 
-                if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true) {
-                    printf("\n- Boletim de %s\n", turmas[opcao_acesso].alunos[opcao].nome);
+                if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true && av_cadastrada[opcao_acesso] == true) { //verifica se o boletim já está disponível e se a turma teve avaliações cadastradas
+                    printf("\n┌─────────────────────────────────────┐\n");
+                    printf("- Boletim de %s\n", turmas[opcao_acesso].alunos[opcao].nome);
                     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
-                        printf("%s - Nota: %.2f/%2.f\n", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].alunos[opcao].notas[i], turmas[opcao_acesso].valor_notas[i]);
+                        printf("%s - Nota: %.2f/%.2f\n", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].alunos[opcao].notas[i], turmas[opcao_acesso].valor_notas[i]);
                         media += turmas[opcao_acesso].alunos[opcao].notas[i]; //acumula a soma do aluno
                     }
 
                     media = media / turmas[opcao_acesso].qtd_avaliacoes; //divide a soma do aluno pela quantidade de avaliações
-                    printf("Média: %.2f\n", media);
+                    printf("\nMédia: %.2f\n", media);
 
                     if (media >= turmas[opcao_acesso].media) {
                         printf("Status: aprovado\n"); 
                     } else {
                         printf("Status: reprovado\n");
                     }
+                    printf("└─────────────────────────────────────┘\n");
 
                 } else {
-                    printf("\nNão foi possível consultar o boletim, verifique se o aluno teve suas notas lançadas.\n");
+                    printf("\nNão foi possível consultar o boletim, verifique se o aluno teve suas notas lançadas e se a turma teve suas avaliações cadastradas.\n");
                 }
 
             } else {
                 printf("\nOpção inválida, selecione um aluno existente.");
             }
+        } while (opcao < 0 || opcao >= turmas[opcao_acesso].qtd_alunos);
 
-        } else {
-            printf("\nNão há alunos cadastrados nessa turma.\n");
-        }
-    } while (opcao < 0 || opcao >= turmas[opcao_acesso].qtd_alunos);
+    } else {
+        printf("\nNão há alunos cadastrados nessa turma.\n");
+    }
 }

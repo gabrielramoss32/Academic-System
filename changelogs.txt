@@ -141,4 +141,6 @@ gcc src/*.c -Iinclude -o sistema
 
 12/10/2026 (V 2.3):
 - Adicionada função de ver boletim do aluno (carece de testes ainda)
-- Há bugs presentes
+
+13/10/2026 (V 2.35):
+- Resolvido bugs em relação à visualização de boletim
