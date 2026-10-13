@@ -144,3 +144,7 @@ gcc src/*.c -Iinclude -o sistema
 
 13/10/2026 (V 2.35):
 - Resolvido bugs em relação à visualização de boletim
+
+13/10/2026 (V 2.4):
+- Iniciada função de estatísticas
+- Desevolvida função de visualizar aprovados e reprovados (ainda carece de testes)

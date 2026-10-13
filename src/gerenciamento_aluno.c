@@ -52,7 +52,7 @@ void menu_alunos (int opcao_acesso) {
                 buscar_aluno(opcao_acesso);
                 break;
             case 7:
-
+                ver_estatisticas(opcao_acesso);
                 break; 
             case 8:
                 excluir_aluno(opcao_acesso);

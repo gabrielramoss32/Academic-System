@@ -92,7 +92,7 @@ void definir_avaliacoes(int opcao_acesso) {
     av_cadastrada[opcao_acesso] = true; //a turma selecionada recebe que as avaliações foram cadastradas
 }
 
-void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
+void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
     int opcao;
 
     if (av_cadastrada[opcao_acesso] == true) {
@@ -195,7 +195,7 @@ void editar_nota_avaliacao (int opcao_acesso) {
     printf("Nota da avaliação alterada.\n");
 }
 
-void listar_avaliacoes(int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
+void listar_avaliacoes(int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
 
     if (av_cadastrada[opcao_acesso]) { //só lista se naquela turma, a avaliação foi cadastrada
         printf("\n- Avaliações do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma);

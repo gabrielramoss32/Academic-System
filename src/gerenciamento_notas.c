@@ -5,7 +5,7 @@
 #include "gerenciamento_avaliacoes.h"
 #include "cadastro_turma.h"
 
-void lancar_notas (int opcao_acesso, bool av_cadastrada[opcao_acesso]) {
+void lancar_notas (int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
     int opcao_nota;
 
     if (av_cadastrada[opcao_acesso] == true && turmas[opcao_acesso].qtd_alunos > 0) { //verifica se as avaliações naquela turma já foram cadastradas e se há  alunos naquela turma
@@ -39,7 +39,7 @@ void preencher_notas(int opcao_acesso, int opcao_nota) {
             printf("\nInsira a nota de: %s [%.2f]: ", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].valor_notas[i]);
             scanf("%f", &turmas[opcao_acesso].alunos[opcao_nota].notas[i]);
             if (turmas[opcao_acesso].alunos[opcao_nota].notas[i] < 0 || turmas[opcao_acesso].alunos[opcao_nota].notas[i] > turmas[opcao_acesso].valor_notas[i]) {
-                printf("\nA nota deve ser maior que 0 e menor ou igual ao valor da avaliação.\n");
+                printf("\nA nota deve ser maior ou igual a 0 e menor ou igual ao valor da avaliação.\n");
             } else {
                 printf("Nota lançada.\n");
             }
@@ -73,8 +73,6 @@ void ver_boletim (int opcao_acesso) {
                         printf("%s - Nota: %.2f/%.2f\n", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].alunos[opcao].notas[i], turmas[opcao_acesso].valor_notas[i]);
                         media += turmas[opcao_acesso].alunos[opcao].notas[i]; //acumula a soma do aluno
                     }
-
-                    media = media / turmas[opcao_acesso].qtd_avaliacoes; //divide a soma do aluno pela quantidade de avaliações
                     printf("\nMédia: %.2f\n", media);
 
                     if (media >= turmas[opcao_acesso].media) {
@@ -95,5 +93,96 @@ void ver_boletim (int opcao_acesso) {
 
     } else {
         printf("\nNão há alunos cadastrados nessa turma.\n");
+    }
+}
+
+void ver_estatisticas (int opcao_acesso) {
+    int opcao;
+    bool existe_um_boletim = false;
+
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) { //verifica se existe pelo menos um boletim disponivel
+            existe_um_boletim = true;
+            break;
+        }
+    }
+
+    if (turmas[opcao_acesso].qtd_alunos > 0) {
+        do {
+            printf("\n┌─────────────────────────────────────┐\n");
+            printf("- Selecione qual estatística deseja ver:\n");
+            printf("\n[1] Ver médias em ordem crescente\n");
+            printf("[2] Ver médias em ordem descrescente\n");
+            printf("[3] Ver maior e menor nota de cada avaliação\n");
+            printf("[4] Visualizar aprovados e reprovados\n");
+            printf("[5] Voltar ao menu\n");
+            printf("└─────────────────────────────────────┘\n");
+            scanf("%d", &opcao);
+
+            if (av_cadastrada[opcao_acesso] == true && existe_um_boletim == true) {
+                switch (opcao) {
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                        aprovados_reprovados(opcao_acesso);
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        printf("\nOpção inválida, selecione uma opção existente.\n");
+                }
+            } else {
+                printf("\nNão foi possível acessar, verifique se algum aluno tem nota lançada e se a turma possui avaliações cadastradas.\n");
+            }
+        } while (opcao != 5);
+
+    } else {
+        printf("\nNão há alunos cadastrados nessa turma.\n");
+    }
+} 
+
+
+void aprovados_reprovados (int opcao_acesso) {
+    float media;
+    bool existe_reprovado = false;
+    bool existe_aprovado = false;
+
+    printf("\nAlunos aprovados:\n");
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
+        media = 0;
+        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
+            media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
+        }
+        if (media >= turmas[opcao_acesso].media) {
+            printf("\n%s - Média: %.2f\n", turmas[opcao_acesso].alunos[i].nome, media);
+            existe_aprovado = true;
+        }
+    } 
+
+    if (!existe_aprovado) {
+        printf("\nNão há aprovados na turma.\n");
+    }
+    
+    printf("\nAlunos reprovados:\n");
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
+        media = 0;
+        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
+            media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
+        }
+        if (media < turmas[opcao_acesso].media) {
+            printf("\n%s - Média: %.2f\n", turmas[opcao_acesso].alunos[i].nome, media);
+            existe_reprovado = true;
+        }
+    }
+
+    if (!existe_reprovado) {
+        printf("\nNão há reprovados na turma.\n");
     }
 }
