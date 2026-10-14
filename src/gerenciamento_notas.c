@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<string.h>
 #include "gerenciamento_notas.h"
 #include "gerenciamento_aluno.h"
 #include "gerenciamento_avaliacoes.h"
@@ -128,7 +129,7 @@ void ver_estatisticas (int opcao_acesso) {
 
                         break;
                     case 3:
-
+                        maior_menor_nota_av(opcao_acesso);
                         break;
                     case 4:
                         aprovados_reprovados(opcao_acesso);
@@ -149,19 +150,40 @@ void ver_estatisticas (int opcao_acesso) {
 } 
 
 
+
+void maior_menor_nota_av (int opcao_acesso) {
+    float maior_nota = 0, menor_nota = 0;
+
+
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) {
+
+            maior_nota = turmas[opcao_acesso].alunos[i].notas[0];
+            menor_nota = turmas[opcao_acesso].alunos[i].notas[0];
+
+            printf("%s:\n", turmas[opcao_acesso].nome_notas[j]); //diz qual avaliação está sendo analisada
+            if (maior_nota > turmas[opcao_acesso].alunos[i].notas[j]) {
+                printf("Maior nota: %.2f - %s\n", maior_nota, turmas[opcao_acesso].alunos[i].nome);
+            } else if (menor_nota < turmas[opcao_acesso].alunos[i].notas[j]) {
+                printf("Menor nota: %.2f - %s\n", menor_nota, turmas[opcao_acesso].alunos[i].nome);
+            }
+        }
+    }
+}
+
 void aprovados_reprovados (int opcao_acesso) {
     float media;
     bool existe_reprovado = false;
     bool existe_aprovado = false;
 
-    printf("\nAlunos aprovados:\n");
+    printf("\n> Alunos aprovados:\n");
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
         media = 0;
         for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
             media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
         }
         if (media >= turmas[opcao_acesso].media) {
-            printf("\n%s - Média: %.2f\n", turmas[opcao_acesso].alunos[i].nome, media);
+            printf("\nMédia: %.2f - %s", media, turmas[opcao_acesso].alunos[i].nome);
             existe_aprovado = true;
         }
     } 
@@ -170,14 +192,14 @@ void aprovados_reprovados (int opcao_acesso) {
         printf("\nNão há aprovados na turma.\n");
     }
     
-    printf("\nAlunos reprovados:\n");
+    printf("\n> Alunos reprovados:\n");
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
         media = 0;
         for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
             media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
         }
         if (media < turmas[opcao_acesso].media) {
-            printf("\n%s - Média: %.2f\n", turmas[opcao_acesso].alunos[i].nome, media);
+            printf("\nMédia: %.2f - %s", media, turmas[opcao_acesso].alunos[i].nome);
             existe_reprovado = true;
         }
     }
