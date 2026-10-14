@@ -153,21 +153,26 @@ void ver_estatisticas (int opcao_acesso) {
 
 void maior_menor_nota_av (int opcao_acesso) {
     float maior_nota = 0, menor_nota = 0;
+    int u, l; //constantes para guardar o índice das maiores e menores notas
 
+    for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
+        printf("%s:\n", turmas[opcao_acesso].nome_notas[i]); //diz qual avaliação está sendo analisada
+        maior_nota = turmas[opcao_acesso].alunos[0].notas[i];
+        menor_nota = turmas[opcao_acesso].alunos[0].notas[i];
+        u = 0, l = 0;
 
-    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) {
-
-            maior_nota = turmas[opcao_acesso].alunos[i].notas[0];
-            menor_nota = turmas[opcao_acesso].alunos[i].notas[0];
-
-            printf("%s:\n", turmas[opcao_acesso].nome_notas[j]); //diz qual avaliação está sendo analisada
-            if (maior_nota > turmas[opcao_acesso].alunos[i].notas[j]) {
-                printf("Maior nota: %.2f - %s\n", maior_nota, turmas[opcao_acesso].alunos[i].nome);
-            } else if (menor_nota < turmas[opcao_acesso].alunos[i].notas[j]) {
-                printf("Menor nota: %.2f - %s\n", menor_nota, turmas[opcao_acesso].alunos[i].nome);
+        for (int j = 0; j < turmas[opcao_acesso].qtd_alunos; j++) {
+            if (turmas[opcao_acesso].alunos[j].notas[i] > maior_nota) {
+                maior_nota = turmas[opcao_acesso].alunos[j].notas[i];
+                u = j;
+            } 
+            if (turmas[opcao_acesso].alunos[j].notas[i] < menor_nota) {
+                menor_nota = turmas[opcao_acesso].alunos[j].notas[i];
+                l = j;
             }
         }
+        printf("Maior nota: %.2f - %s", maior_nota, turmas[opcao_acesso].alunos[u].nome);
+        printf("Menor nota: %.2f - %s\n", menor_nota, turmas[opcao_acesso].alunos[l].nome);
     }
 }
 

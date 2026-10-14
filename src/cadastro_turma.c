@@ -16,8 +16,13 @@ void turma_cadastro (bool professor1_cadastrado) {
         printf("Você ainda não realizou o seu cadastro, realize ele para cadastrar as suas turmas.\n");
         menu_inicial();
     } else {
-        printf("Insira a série da turma (6º, 7º, 8º): ");
-        scanf("%d", &turmas[qtd_turmas].serie);
+        do {
+            printf("Insira a série da turma (6º, 7º, 8º): ");
+            scanf("%d", &turmas[qtd_turmas].serie);
+            if (turmas[qtd_turmas].serie <= 0 || turmas[qtd_turmas].serie > 9) {
+                printf("A série deve ser maior que 0 e menor ou igual a 9.\n");
+            }
+        } while (turmas[qtd_turmas].serie <= 0 || turmas[qtd_turmas].serie > 9);
 
         printf("Digite a turma (A, B, C): ");
         scanf(" %c", &turmas[qtd_turmas].turma);

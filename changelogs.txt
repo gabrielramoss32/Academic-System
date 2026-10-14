@@ -147,4 +147,8 @@ gcc src/*.c -Iinclude -o sistema
 
 13/10/2026 (V 2.4):
 - Iniciada função de estatísticas
-- Desevolvida função de visualizar aprovados e reprovados (ainda carece de testes)
+- Criada função de visualizar aprovados e reprovados
+
+14/10/2026 (V 2.5):
+- Desenvolvida função de ver maiores e menores notas de cada avaliação
+- Resolvido alguns bugs presentes
