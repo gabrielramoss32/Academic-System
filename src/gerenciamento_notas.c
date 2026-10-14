@@ -68,6 +68,7 @@ void ver_boletim (int opcao_acesso) {
             if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) {
 
                 if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true && av_cadastrada[opcao_acesso] == true) { //verifica se o boletim já está disponível e se a turma teve avaliações cadastradas
+                    media = 0;
                     printf("\n┌─────────────────────────────────────┐\n");
                     printf("- Boletim de %s\n", turmas[opcao_acesso].alunos[opcao].nome);
                     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
@@ -119,6 +120,9 @@ void ver_estatisticas (int opcao_acesso) {
             printf("[5] Voltar ao menu\n");
             printf("└─────────────────────────────────────┘\n");
             scanf("%d", &opcao);
+            if (opcao == 5) {
+                break;
+            }
 
             if (av_cadastrada[opcao_acesso] == true && existe_um_boletim == true) {
                 switch (opcao) {
@@ -154,14 +158,28 @@ void ver_estatisticas (int opcao_acesso) {
 void maior_menor_nota_av (int opcao_acesso) {
     float maior_nota = 0, menor_nota = 0;
     int u, l; //constantes para guardar o índice das maiores e menores notas
+    int qtd_boletins_disponiveis;
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
         printf("%s:\n", turmas[opcao_acesso].nome_notas[i]); //diz qual avaliação está sendo analisada
-        maior_nota = turmas[opcao_acesso].alunos[0].notas[i];
-        menor_nota = turmas[opcao_acesso].alunos[0].notas[i];
-        u = 0, l = 0;
+
+        for (int q = 0; q < turmas[opcao_acesso].qtd_alunos; q++) {
+            if (turmas[opcao_acesso].alunos[q].boletim_disponivel == true) { //procura o primeiro aluno com boletim disponnível para assumir a maior e menor nota
+                maior_nota = turmas[opcao_acesso].alunos[q].notas[i];
+                menor_nota = turmas[opcao_acesso].alunos[q].notas[i];
+                u = q;
+                l = q;
+                break;
+            }
+        }
+        qtd_boletins_disponiveis = 0;
 
         for (int j = 0; j < turmas[opcao_acesso].qtd_alunos; j++) {
+            if (!turmas[opcao_acesso].alunos[j].boletim_disponivel) { //pula alunos sem boletim
+                continue;
+            } else {
+                qtd_boletins_disponiveis++;
+            }
             if (turmas[opcao_acesso].alunos[j].notas[i] > maior_nota) {
                 maior_nota = turmas[opcao_acesso].alunos[j].notas[i];
                 u = j;
@@ -174,6 +192,10 @@ void maior_menor_nota_av (int opcao_acesso) {
         printf("Maior nota: %.2f - %s", maior_nota, turmas[opcao_acesso].alunos[u].nome);
         printf("Menor nota: %.2f - %s\n", menor_nota, turmas[opcao_acesso].alunos[l].nome);
     }
+
+    if (qtd_boletins_disponiveis == 1) { //verifica se há só um aluno com boletim disponível, se sim, ele exibe a mensagem abaixo
+        printf("> Estatísticas baseadas no único aluno com boletim disponível.\n");
+    }
 }
 
 void aprovados_reprovados (int opcao_acesso) {
@@ -184,6 +206,9 @@ void aprovados_reprovados (int opcao_acesso) {
     printf("\n> Alunos aprovados:\n");
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
         media = 0;
+        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { //pula alunos sem boletim
+            continue;
+        }
         for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
             media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
         }
@@ -200,6 +225,9 @@ void aprovados_reprovados (int opcao_acesso) {
     printf("\n> Alunos reprovados:\n");
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
         media = 0;
+        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { //pula alunos sem boletim
+            continue;
+        }
         for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
             media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
         }

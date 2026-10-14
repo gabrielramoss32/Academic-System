@@ -152,3 +152,6 @@ gcc src/*.c -Iinclude -o sistema
 14/10/2026 (V 2.5):
 - Desenvolvida função de ver maiores e menores notas de cada avaliação
 - Resolvido alguns bugs presentes
+
+14/10/2026: (V 2.55):
+- Resolvido bugs gerais de comparação no gerenciamento de notas
