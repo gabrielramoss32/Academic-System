@@ -153,5 +153,14 @@ gcc src/*.c -Iinclude -o sistema
 - Desenvolvida função de ver maiores e menores notas de cada avaliação
 - Resolvido alguns bugs presentes
 
-14/10/2026: (V 2.55):
+14/10/2026 (V 2.55):
 - Resolvido bugs gerais de comparação no gerenciamento de notas
+
+20/10/2026 (V 2.6):
+- Adicionada a última função: ordenação de médias em ordem crescente e decrescente
+
+Próximos passos finais:
+- Rever a função e garantir a integridade
+- Tirar comentários excessivos do projeto
+- Testar com múltiplas IA´s
+- Documentar o README final

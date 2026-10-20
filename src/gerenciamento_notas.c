@@ -6,6 +6,8 @@
 #include "gerenciamento_avaliacoes.h"
 #include "cadastro_turma.h"
 
+Classificacao aluno_aux[MAX_ALUNOS]; //struct auxiliar declarada no arquivo para ordenação
+
 void lancar_notas (int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
     int opcao_nota;
 
@@ -100,7 +102,7 @@ void ver_boletim (int opcao_acesso) {
 
 void ver_estatisticas (int opcao_acesso) {
     int opcao;
-    bool existe_um_boletim = false;
+    bool existe_um_boletim = false, crescente = false; //crescente indica a variável booleana que serve como parametro para decidir qual ordenação será chamada
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
         if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) { //verifica se existe pelo menos um boletim disponivel
@@ -127,10 +129,13 @@ void ver_estatisticas (int opcao_acesso) {
             if (av_cadastrada[opcao_acesso] == true && existe_um_boletim == true) {
                 switch (opcao) {
                     case 1:
-
+                        crescente = true; //a função antes de ser acessada, recebe o true na variável "crescente", indicando que o algoritmo na função será o de ordem crescente
+                        crescente_decrescente(opcao_acesso, crescente);
                         break;
                     case 2:
-
+                        //crescente aqui não altera, indicando que continua falso, ou seja, o algoritmo na função será o de ordem decrescente
+                        crescente = false;
+                        crescente_decrescente(opcao_acesso, crescente);
                         break;
                     case 3:
                         maior_menor_nota_av(opcao_acesso);
@@ -153,7 +158,58 @@ void ver_estatisticas (int opcao_acesso) {
     }
 } 
 
+void crescente_decrescente (int opcao_acesso, bool crescente) {
+    int qtd_boletins_disponiveis = 0, k = 0; 
+    //k = representa o indice do aluno que tem boletim disponível, fazendo com que o aluno com boletim disponivel,
+    //tenha seus dados registrados de 1 em 1, ao inves de registrar apenas no índice de i quando a condição é cumprida
+    Classificacao aux; //auxiliar para ser o intermédio da struct
 
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) {
+            aluno_aux[k].media_final = 0; //inicializa a média daquele aluno
+            qtd_boletins_disponiveis++;
+            strcpy(aluno_aux[k].nome, turmas[opcao_acesso].alunos[i].nome); //copia o nome do aluno atual para a struct auxiliar
+            for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) {
+                aluno_aux[k].media_final += turmas[opcao_acesso].alunos[i].notas[j]; //copia todas as notas do aluno para a média dele
+            }
+            k++;
+        }
+    }
+    
+    //ALGORITMO DE ORDENAÇÃO CRESCENTE
+    if (crescente == true) {
+        for (int i = 0; i < qtd_boletins_disponiveis; i++) {
+            for (int j = i+1; j < qtd_boletins_disponiveis; j++) {
+                if (aluno_aux[i].media_final < aluno_aux[j].media_final) {
+                    aux = aluno_aux[j];
+                    aluno_aux[j] = aluno_aux[i];
+                    aluno_aux[i] = aux;
+                }
+            }
+        }
+        printf("\n- Média dos alunos em ordem crescente:\n");
+        for (int i = 0; i < qtd_boletins_disponiveis; i++) {
+            printf("%.2f - %s", aluno_aux[i].media_final, aluno_aux[i].nome);
+        }
+    }
+
+    //ALGORITMO DE ORDENAÇÃO DECRESCENTE
+    if (!crescente) {
+        for (int i = 0; i < qtd_boletins_disponiveis; i++) {
+            for (int j = i+1; j < qtd_boletins_disponiveis; j++) {
+                if (aluno_aux[i].media_final > aluno_aux[j].media_final) {
+                    aux = aluno_aux[j];
+                    aluno_aux[j] = aluno_aux[i];
+                    aluno_aux[i] = aux;
+                }
+            }
+        }
+        printf("\n- Média dos alunos em ordem decrescente:\n");
+        for (int i = 0; i < qtd_boletins_disponiveis; i++) {
+            printf("%.2f - %s", aluno_aux[i].media_final, aluno_aux[i].nome);
+        }
+    }
+}
 
 void maior_menor_nota_av (int opcao_acesso) {
     float maior_nota = 0, menor_nota = 0;
