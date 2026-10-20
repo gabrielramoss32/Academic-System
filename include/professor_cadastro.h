@@ -9,9 +9,9 @@ typedef struct {
     char formacao[50];
     char escola[100];
     bool cadastrado;
-} Professor; //struct com as informações do professor
+} Professor; //Struct com as informações do professor
 
-extern Professor professor1; //variavel global declarada para outros arquivos reconhecerem
+extern Professor professor1; //Variável global declarada para outros arquivos reconhecerem
 
 void cadastro_professor ();
 

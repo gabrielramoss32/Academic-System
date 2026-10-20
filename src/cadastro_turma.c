@@ -7,8 +7,8 @@
 #include "gerenciamento_avaliacoes.h"
 
 Turma turmas[MAX_TURMAS]; //Variável turmas, declarada pelo typedef da struct turma
-int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas;
-bool acesso_menu = true;
+int qtd_turmas = 0; //Define o tamanho atual da quantidade de turmas
+bool acesso_menu = true; //Variável que abre o menu apenas uma vez, impedindo recorrência indesejada
 
 void turma_cadastro (bool professor1_cadastrado) {
 
@@ -31,13 +31,15 @@ void turma_cadastro (bool professor1_cadastrado) {
         scanf("%s", turmas[qtd_turmas].turno);
 
         printf("Digite qual matéria você ministra nessa turma: ");
-        getchar(); //come o enter do buffer
+        getchar();
         fgets(turmas[qtd_turmas].disciplina, sizeof(turmas[qtd_turmas].disciplina), stdin);
 
         printf("\n- Turma nº %d/%d cadastrada, selecione a próxima opção: \n", qtd_turmas + 1, MAX_TURMAS);
+
         turmas[qtd_turmas].qtd_alunos = 0; //zera ou define a quantidade de alunos daquela turma como zero
         av_cadastrada[qtd_turmas] = false; //define como false que aquela turma teve avaliação cadastrada (impede de acessar as avaliações de uma turma que foi excluída)
-        qtd_turmas++; //Incrementação da quantidade de turma atual
+        qtd_turmas++; //Incrementação da quantidade de turma atual (limite: 10)
+
         if (acesso_menu) { //chama esse menu somente uma vez
             acesso_menu = false; //fecha qualquer possibilidade de abrir o menu novamente
             menu_turma();
@@ -46,7 +48,7 @@ void turma_cadastro (bool professor1_cadastrado) {
 }
 
 void menu_turma () {
-    int opcao; //opção do switch case para gerenciar turma
+    int opcao;
     do {
         printf("\n┌─────────────────────────────┐\n");
         printf("[1] Cadastrar nova turma\n");

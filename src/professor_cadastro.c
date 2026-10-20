@@ -3,11 +3,11 @@
 #include "cadastro_turma.h"
 
 Professor professor1 = {
-    .cadastrado = true //professor global definido como sem cadastro e variavel de professor declarada (pode ser alterado para fins de teste)
+    .cadastrado = false //professor global definido como sem cadastro e variável de professor declarada (pode ser alterado para fins de teste)
 };
 
 void cadastro_professor () {
-    int opcao; //opcao do switch case de cadastrar turma ou sair
+    int opcao;
 
     printf("Insira seu ID: ");
     scanf("%d", &professor1.id);

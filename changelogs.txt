@@ -1,6 +1,7 @@
-【C】【h】【a】【n】【g】【e】【l】【o】【g】【s】
+【C】【h】【a】【n】【g】【e】【l】【o】【g】【s】 
 
 → Documento do projeto responsável por listar todas as alterações e etapas do projeto, documentados com sua data, versão e alterações feitas.
+→ Versão atual: 2.65
 
 → Código de compilação do projeto:
 gcc src/*.c -Iinclude -o sistema
@@ -159,8 +160,12 @@ gcc src/*.c -Iinclude -o sistema
 20/10/2026 (V 2.6):
 - Adicionada a última função: ordenação de médias em ordem crescente e decrescente
 
+20/10/2026 (V 2.65):
+- Removidos comentários em excesso do projeto, favorecendo um código mais limpo
+- Merge no main
+
 Próximos passos finais:
-- Rever a função e garantir a integridade
-- Tirar comentários excessivos do projeto
+- Rever a função e garantir a integridade ☑
+- Tirar comentários excessivos do projeto ☑
 - Testar com múltiplas IA´s
 - Documentar o README final

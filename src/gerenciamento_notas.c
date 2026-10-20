@@ -6,12 +6,12 @@
 #include "gerenciamento_avaliacoes.h"
 #include "cadastro_turma.h"
 
-Classificacao aluno_aux[MAX_ALUNOS]; //struct auxiliar declarada no arquivo para ordenação
+Classificacao aluno_aux[MAX_ALUNOS]; //Struct auxiliar declarada no arquivo para ordenação
 
 void lancar_notas (int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
     int opcao_nota;
 
-    if (av_cadastrada[opcao_acesso] == true && turmas[opcao_acesso].qtd_alunos > 0) { //verifica se as avaliações naquela turma já foram cadastradas e se há  alunos naquela turma
+    if (av_cadastrada[opcao_acesso] == true && turmas[opcao_acesso].qtd_alunos > 0) { //Verifica se as avaliações naquela turma já foram cadastradas e se há  alunos naquela turma
         do {
             printf("\n┌─────────────────────────────────────┐\n");
             printf("- Digite o número do aluno que terá sua nota lançada:\n");
@@ -47,7 +47,7 @@ void preencher_notas(int opcao_acesso, int opcao_nota) {
                 printf("Nota lançada.\n");
             }
         } while (turmas[opcao_acesso].alunos[opcao_nota].notas[i] < 0 || 
-        turmas[opcao_acesso].alunos[opcao_nota].notas[i] > turmas[opcao_acesso].valor_notas[i]); //repete o menu se a nota for inválida (< 0 ou > do que o valor daquela avaliação)
+        turmas[opcao_acesso].alunos[opcao_nota].notas[i] > turmas[opcao_acesso].valor_notas[i]); //Repete o menu se a nota for inválida (< 0 ou > do que o valor daquela avaliação)
     }
     turmas[opcao_acesso].alunos[opcao_nota].boletim_disponivel = true;
     printf("\n> Notas lançadas, confira o boletim do aluno e lance novamente as notas se quiser editar alguma nota.\n");
@@ -69,13 +69,14 @@ void ver_boletim (int opcao_acesso) {
 
             if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) {
 
-                if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true && av_cadastrada[opcao_acesso] == true) { //verifica se o boletim já está disponível e se a turma teve avaliações cadastradas
+                if (turmas[opcao_acesso].alunos[opcao].boletim_disponivel == true && av_cadastrada[opcao_acesso] == true) { 
+                    //Verifica se o boletim já está disponível e se a turma teve avaliações cadastradas
                     media = 0;
                     printf("\n┌─────────────────────────────────────┐\n");
                     printf("- Boletim de %s\n", turmas[opcao_acesso].alunos[opcao].nome);
                     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
                         printf("%s - Nota: %.2f/%.2f\n", turmas[opcao_acesso].nome_notas[i], turmas[opcao_acesso].alunos[opcao].notas[i], turmas[opcao_acesso].valor_notas[i]);
-                        media += turmas[opcao_acesso].alunos[opcao].notas[i]; //acumula a soma do aluno
+                        media += turmas[opcao_acesso].alunos[opcao].notas[i]; //Acumula a soma do aluno
                     }
                     printf("\nMédia: %.2f\n", media);
 
@@ -102,10 +103,10 @@ void ver_boletim (int opcao_acesso) {
 
 void ver_estatisticas (int opcao_acesso) {
     int opcao;
-    bool existe_um_boletim = false, crescente = false; //crescente indica a variável booleana que serve como parametro para decidir qual ordenação será chamada
+    bool existe_um_boletim = false, crescente = false; //Crescente indica a variável booleana que serve como parametro para decidir qual ordenação será chamada
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-        if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) { //verifica se existe pelo menos um boletim disponivel
+        if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) { //Verifica se existe pelo menos um boletim disponivel ∃x(B(x) ^ D(x))
             existe_um_boletim = true;
             break;
         }
@@ -129,12 +130,11 @@ void ver_estatisticas (int opcao_acesso) {
             if (av_cadastrada[opcao_acesso] == true && existe_um_boletim == true) {
                 switch (opcao) {
                     case 1:
-                        crescente = true; //a função antes de ser acessada, recebe o true na variável "crescente", indicando que o algoritmo na função será o de ordem crescente
+                        crescente = true; //A função antes de ser acessada, recebe o true na variável "crescente", indicando que o algoritmo na função será o de ordem crescente
                         crescente_decrescente(opcao_acesso, crescente);
                         break;
                     case 2:
-                        //crescente aqui não altera, indicando que continua falso, ou seja, o algoritmo na função será o de ordem decrescente
-                        crescente = false;
+                        crescente = false; //A função crescente recebe false, indicando que o algoritmo de ordenação será o decrescente
                         crescente_decrescente(opcao_acesso, crescente);
                         break;
                     case 3:
@@ -162,15 +162,16 @@ void crescente_decrescente (int opcao_acesso, bool crescente) {
     int qtd_boletins_disponiveis = 0, k = 0; 
     //k = representa o indice do aluno que tem boletim disponível, fazendo com que o aluno com boletim disponivel,
     //tenha seus dados registrados de 1 em 1, ao inves de registrar apenas no índice de i quando a condição é cumprida
-    Classificacao aux; //auxiliar para ser o intermédio da struct
+
+    Classificacao aux; //Auxiliar para ser o intermédio da struct
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
         if (turmas[opcao_acesso].alunos[i].boletim_disponivel == true) {
-            aluno_aux[k].media_final = 0; //inicializa a média daquele aluno
+            aluno_aux[k].media_final = 0; //Inicializa a média daquele aluno
             qtd_boletins_disponiveis++;
-            strcpy(aluno_aux[k].nome, turmas[opcao_acesso].alunos[i].nome); //copia o nome do aluno atual para a struct auxiliar
+            strcpy(aluno_aux[k].nome, turmas[opcao_acesso].alunos[i].nome); //Copia o nome do aluno atual para a struct auxiliar
             for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) {
-                aluno_aux[k].media_final += turmas[opcao_acesso].alunos[i].notas[j]; //copia todas as notas do aluno para a média dele
+                aluno_aux[k].media_final += turmas[opcao_acesso].alunos[i].notas[j]; //Copia todas as notas do aluno para a média dele
             }
             k++;
         }
@@ -180,7 +181,7 @@ void crescente_decrescente (int opcao_acesso, bool crescente) {
     if (crescente == true) {
         for (int i = 0; i < qtd_boletins_disponiveis; i++) {
             for (int j = i+1; j < qtd_boletins_disponiveis; j++) {
-                if (aluno_aux[i].media_final < aluno_aux[j].media_final) {
+                if (aluno_aux[i].media_final > aluno_aux[j].media_final) {
                     aux = aluno_aux[j];
                     aluno_aux[j] = aluno_aux[i];
                     aluno_aux[i] = aux;
@@ -197,7 +198,7 @@ void crescente_decrescente (int opcao_acesso, bool crescente) {
     if (!crescente) {
         for (int i = 0; i < qtd_boletins_disponiveis; i++) {
             for (int j = i+1; j < qtd_boletins_disponiveis; j++) {
-                if (aluno_aux[i].media_final > aluno_aux[j].media_final) {
+                if (aluno_aux[i].media_final < aluno_aux[j].media_final) {
                     aux = aluno_aux[j];
                     aluno_aux[j] = aluno_aux[i];
                     aluno_aux[i] = aux;
@@ -213,14 +214,14 @@ void crescente_decrescente (int opcao_acesso, bool crescente) {
 
 void maior_menor_nota_av (int opcao_acesso) {
     float maior_nota = 0, menor_nota = 0;
-    int u, l; //constantes para guardar o índice das maiores e menores notas
+    int u, l; //Constantes para guardar o índice das maiores e menores notas
     int qtd_boletins_disponiveis;
 
     for (int i = 0; i < turmas[opcao_acesso].qtd_avaliacoes; i++) {
-        printf("%s:\n", turmas[opcao_acesso].nome_notas[i]); //diz qual avaliação está sendo analisada
+        printf("%s:\n", turmas[opcao_acesso].nome_notas[i]); //Diz qual avaliação está sendo analisada
 
         for (int q = 0; q < turmas[opcao_acesso].qtd_alunos; q++) {
-            if (turmas[opcao_acesso].alunos[q].boletim_disponivel == true) { //procura o primeiro aluno com boletim disponnível para assumir a maior e menor nota
+            if (turmas[opcao_acesso].alunos[q].boletim_disponivel == true) { //Procura o primeiro aluno com boletim disponnível para assumir a maior e menor nota
                 maior_nota = turmas[opcao_acesso].alunos[q].notas[i];
                 menor_nota = turmas[opcao_acesso].alunos[q].notas[i];
                 u = q;
@@ -231,7 +232,7 @@ void maior_menor_nota_av (int opcao_acesso) {
         qtd_boletins_disponiveis = 0;
 
         for (int j = 0; j < turmas[opcao_acesso].qtd_alunos; j++) {
-            if (!turmas[opcao_acesso].alunos[j].boletim_disponivel) { //pula alunos sem boletim
+            if (!turmas[opcao_acesso].alunos[j].boletim_disponivel) { //Pula alunos sem boletim
                 continue;
             } else {
                 qtd_boletins_disponiveis++;
@@ -249,7 +250,7 @@ void maior_menor_nota_av (int opcao_acesso) {
         printf("Menor nota: %.2f - %s\n", menor_nota, turmas[opcao_acesso].alunos[l].nome);
     }
 
-    if (qtd_boletins_disponiveis == 1) { //verifica se há só um aluno com boletim disponível, se sim, ele exibe a mensagem abaixo
+    if (qtd_boletins_disponiveis == 1) { //Verifica se há só um aluno com boletim disponível, se sim, ele exibe a mensagem abaixo
         printf("> Estatísticas baseadas no único aluno com boletim disponível.\n");
     }
 }
@@ -260,13 +261,13 @@ void aprovados_reprovados (int opcao_acesso) {
     bool existe_aprovado = false;
 
     printf("\n> Alunos aprovados:\n");
-    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //Percorre todos os alunos
         media = 0;
-        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { //pula alunos sem boletim
+        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { //Pula alunos sem boletim
             continue;
         }
-        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
-            media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
+        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //Percorre todas as avaliações
+            media += turmas[opcao_acesso].alunos[i].notas[j]; //Calcula a média de cada aluno    
         }
         if (media >= turmas[opcao_acesso].media) {
             printf("\nMédia: %.2f - %s", media, turmas[opcao_acesso].alunos[i].nome);
@@ -279,13 +280,13 @@ void aprovados_reprovados (int opcao_acesso) {
     }
     
     printf("\n> Alunos reprovados:\n");
-    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { 
         media = 0;
-        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { //pula alunos sem boletim
+        if (!turmas[opcao_acesso].alunos[i].boletim_disponivel) { 
             continue;
         }
-        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { //percorre todas as avaliações
-            media += turmas[opcao_acesso].alunos[i].notas[j]; //calcula a média de cada aluno    
+        for (int j = 0; j < turmas[opcao_acesso].qtd_avaliacoes; j++) { 
+            media += turmas[opcao_acesso].alunos[i].notas[j];     
         }
         if (media < turmas[opcao_acesso].media) {
             printf("\nMédia: %.2f - %s", media, turmas[opcao_acesso].alunos[i].nome);

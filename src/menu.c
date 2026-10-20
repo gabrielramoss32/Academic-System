@@ -6,7 +6,7 @@
 
 void menu_inicial () {
     //Raiz do projeto: 1ª etapa a ser chamada
-    int opcao; //opcao inicial do switch case
+    int opcao;
     
     do {
         printf("\n┌───────SISTEMA ACADÊMICO───────┐\n");
@@ -22,7 +22,9 @@ void menu_inicial () {
                 cadastro_professor();
                 break;
             case 2:
-                turma_cadastro(professor1.cadastrado);
+                turma_cadastro(professor1.cadastrado); 
+                //Passa como parametro a variavel booleana que diz se o professor foi cadastrado ou não
+                //É necessário que o professor esteja cadastrado para cadastrar a turma
                 break;
             case 3:
                 printf("Obrigado por acessar o sistema.");

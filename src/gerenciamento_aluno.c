@@ -30,7 +30,7 @@ void menu_alunos (int opcao_acesso) {
         
         switch (opcao) {
             case 1:
-                if (turmas[opcao_acesso].qtd_alunos >= MAX_ALUNOS) { //verifica se a turma já está cheia
+                if (turmas[opcao_acesso].qtd_alunos >= MAX_ALUNOS) {
                     printf("\nQuantidade de alunos excedida por turma, exclua um caso queira cadastrar.\n");
                 } else {
                     cadastro_alunos(opcao_acesso);
@@ -65,7 +65,7 @@ void menu_alunos (int opcao_acesso) {
             default:
                 printf("\nOpção inválida, selecione uma opção existente.\n");         
         }
-    } while (opcao != 10); //repete o menu ate o usuario querer sair
+    } while (opcao != 10);
 }
 
 void cadastro_alunos (int opcao_acesso) {
@@ -78,10 +78,10 @@ void cadastro_alunos (int opcao_acesso) {
     do {
         printf("Digite a matrícula do aluno (6 dígitos): ");
         scanf("%d", &turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula);
-    } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //repete se a matricula não tiver sido validada
+    } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //Repete se a matrícula não tiver sido validada
 
     printf("\n - Aluno nº %d/%d cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1, MAX_ALUNOS);
-    turmas[opcao_acesso].qtd_alunos++; //incrementação da quantidade de alunos registrados naquela turma
+    turmas[opcao_acesso].qtd_alunos++; //Incrementação da quantidade de alunos registrados naquela turma
 }
 
 void listar_alunos (int opcao_acesso) {
@@ -89,7 +89,7 @@ void listar_alunos (int opcao_acesso) {
         printf("\nNão há alunos para serem listados, cadastre um.\n");
     } else {
         printf("\n┌─────────────────────────────────────┐");
-        printf("\nAlunos do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma); //mostra a turma em que os alunos serão listados
+        printf("\nAlunos do %dº ano %c:\n", turmas[opcao_acesso].serie, turmas[opcao_acesso].turma); //Mostra a turma em que os alunos serão listados
         for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
             printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula);
         }
@@ -98,13 +98,13 @@ void listar_alunos (int opcao_acesso) {
 }
 
 void editar_alunos (int opcao_acesso) {
-    int opcao_edit; //opção para decidir qual aluno será editado
+    int opcao_edit;
 
-    if (turmas[opcao_acesso].qtd_alunos > 0) { //verifica se tem alunos para serem editados
+    if (turmas[opcao_acesso].qtd_alunos > 0) {
         do {
             printf("\n┌─────────────────────────────────────┐\n");
             printf("- Digite o número do aluno que quer editar:\n");
-            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //lista todos os alunos
+            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
                 printf("\n[%d] %s | Matrícula: %d\n", i, turmas[opcao_acesso].alunos[i].nome, turmas[opcao_acesso].alunos[i].matricula);
             }
             printf("└─────────────────────────────────────┘\n");
@@ -135,7 +135,7 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
                 printf("Digite o novo nome do aluno: ");
                 getchar();
                 fgets(turmas[opcao_acesso].alunos[opcao_edit].nome,
-                sizeof(turmas[opcao_acesso].alunos[opcao_edit].nome), stdin); //pega o novo nome do aluno
+                sizeof(turmas[opcao_acesso].alunos[opcao_edit].nome), stdin);
                 printf("\nNome alterado.\n");
                 break;
             case 2:
@@ -150,7 +150,7 @@ void dados_editar_aluno (int opcao_edit, int opcao_acesso) {
             default:
                 printf("Opção inválida, selecione uma opção existente.");
         }
-    } while (opcao != 3); //repete enquanto o usuario nao quiser sair
+    } while (opcao != 3);
 }
 
 bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula)  {
@@ -158,10 +158,10 @@ bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula)  {
     bool repetido = false, irregular = false;
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
         if (i == indice_aluno) {
-            continue; //evita de comparar a matrícula com ela mesma e pula para a próxima iteração
+            continue; //Evita de comparar a matrícula com ela mesma e pula para a próxima iteração
         }
 
-        if (matricula == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula com as que já foram registradas
+        if (matricula == turmas[opcao_acesso].alunos[i].matricula) { //Compara a matrícula com as que já foram registradas
             printf("\nNúmero de matrícula já registrado, insira um número disponível.\n");
             repetido = true;
             break;
@@ -169,42 +169,42 @@ bool validar_matricula (int opcao_acesso, int indice_aluno, int matricula)  {
 
     }
 
-    if (matricula >= 1000000 || matricula <= 99999) { //verifica se a matrícula tem 6 dígitos
+    if (matricula >= 1000000 || matricula <= 99999) { //Verifica se a matrícula tem 6 dígitos
         printf("\nO número de matrícula deve conter obrigatoriamente 6 dígitos.\n");
         irregular = true;
     }
 
     if (repetido == true || irregular == true) {
-        return false; //retorna falso se a matrícula estiver incorreta
+        return false; //Retorna falso se a matrícula estiver incorreta
     } else {
-        return true; //retorna verdadeiro se a matrícula estiver correta
+        return true; //Retorna verdadeiro se a matrícula estiver correta
     }
 }
 
 void excluir_aluno (int opcao_acesso) {
-    int opcao; //variável para decidir qual aluno será excluido
-    char confirm; //variável de confirmação da exclusão
+    int opcao;
+    char confirm;
 
-    if (turmas[opcao_acesso].qtd_alunos > 0) { //verifica se tem alunos para excluir
+    if (turmas[opcao_acesso].qtd_alunos > 0) {
         do {
             printf("\n┌─────────────────────────────────────┐\n");
             printf("- Digite o número do aluno que deseja excluir:\n");
             for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-                printf("[%d] %s", i, turmas[opcao_acesso].alunos[i].nome); //lista todos os alunos disponíveis para exclusão
+                printf("[%d] %s", i, turmas[opcao_acesso].alunos[i].nome);
             }
             printf("└─────────────────────────────────────┘\n");
             scanf("%d", &opcao);
 
-            if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) { //verifica se é um aluno válido
+            if (opcao >= 0 && opcao < turmas[opcao_acesso].qtd_alunos) { //Verifica se é um aluno válido
                 printf("\nDeseja realmente excluir esse aluno? (S/N)\n");
                 printf("Quantidade de alunos: %d >>> %d\n", turmas[opcao_acesso].qtd_alunos, turmas[opcao_acesso].qtd_alunos - 1);
                 scanf(" %c", &confirm);
                 if (confirm == 'S' || confirm == 's') {
                     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos - opcao - 1; i++) {
                         turmas[opcao_acesso].alunos[opcao] = turmas[opcao_acesso].alunos[opcao + 1];
-                        opcao++; //incrementa para deslocar os próximos alunos
+                        opcao++; //Incrementa para deslocar os próximos alunos
                     }
-                    turmas[opcao_acesso].qtd_alunos--; //retira uma quantidade de alunos cadastrados
+                    turmas[opcao_acesso].qtd_alunos--; //Retira uma quantidade de alunos cadastrados
                     opcao = 0;
                     printf("\nExclusão bem sucedida, você retornará ao menu.\n");
                 } else {
@@ -220,7 +220,7 @@ void excluir_aluno (int opcao_acesso) {
 }
 
 void buscar_aluno(int opcao_acesso) {
-    int opcao; //variável para decidir de qual forma o aluno será procurado
+    int opcao;
     
     printf("\n┌─────────────────────────────────────┐");
     printf("\n- Selecione como deseja procurar o aluno: \n");
@@ -240,13 +240,13 @@ void buscar_aluno(int opcao_acesso) {
 }
 
 void busca_por_matricula(int opcao_acesso) {
-    int matricula_buscada; //representa a matrícula procurada
-    bool encontrado = false; //variável para controlar a busca do aluno pela matrícula
+    int matricula_buscada; //Representa a matrícula procurada
+    bool encontrado = false; //Variável para controlar a busca do aluno pela matrícula
 
     printf("\nDigite a matrícula do aluno que deseja procurar: ");
     scanf("%d", &matricula_buscada);
     for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
-        if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) { //compara a matrícula buscada com todas as matrículas registradas
+        if (matricula_buscada == turmas[opcao_acesso].alunos[i].matricula) { //Vompara a matrícula buscada com todas as matrículas registradas
             printf("\nAluno encontrado. \n");
             printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
             printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
@@ -261,24 +261,24 @@ void busca_por_matricula(int opcao_acesso) {
 }
 
 void busca_por_nome (int opcao_acesso) {
-    char nome_buscado[100]; //representa o aluno que a pessoa quer buscar
-    char nome_temporario[100]; //representa a cópia temporária que será usada para comparação
-    bool encontrado = false; //variável booleana para controlar se a busca do aluno foi bem sucedida
+    char nome_buscado[100]; //Representa o aluno que a pessoa quer buscar
+    char nome_temporario[100]; //Representa a cópia temporária que será usada para comparação
+    bool encontrado = false; //Variável booleana para controlar se a busca do aluno foi bem sucedida
 
     printf("\nDigite o nome do aluno que deseja procurar: ");
     getchar();
     fgets(nome_buscado, sizeof(nome_buscado), stdin);
     for (int i = 0; i < strlen(nome_buscado); i++) {
-        nome_buscado[i] = tolower(nome_buscado[i]); //normaliza o nome buscado para ficar todo em minúsculo
+        nome_buscado[i] = tolower(nome_buscado[i]); //Normaliza o nome buscado para ficar todo em minúsculo
     }
 
-    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //percorre todos os alunos
-        strcpy(nome_temporario, turmas[opcao_acesso].alunos[i].nome); //copia o nome do aluno atual para o nome temporário
-        for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //percorre cada caractere do nome do aluno
-            nome_temporario[j] = tolower(nome_temporario[j]); //normaliza o nome buscado para ficar todo em minúsculo
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) { //Percorre todos os alunos
+        strcpy(nome_temporario, turmas[opcao_acesso].alunos[i].nome); //Copia o nome do aluno atual para o nome temporário
+        for (int j = 0; j < strlen(turmas[opcao_acesso].alunos[i].nome); j++) { //Percorre cada caractere do nome do aluno
+            nome_temporario[j] = tolower(nome_temporario[j]); //Normaliza o nome buscado para ficar todo em minúsculo
         }
         
-        if (strstr(nome_temporario, nome_buscado) != NULL) { //compara o nome inserido e verifica se há um nome igual
+        if (strstr(nome_temporario, nome_buscado) != NULL) { //Compara o nome inserido e verifica se há um nome igual
             printf("\nAluno encontrado.\n");
             printf("Nome: %s", turmas[opcao_acesso].alunos[i].nome);
             printf("Matrícula: %d\n", turmas[opcao_acesso].alunos[i].matricula);
@@ -286,7 +286,7 @@ void busca_por_nome (int opcao_acesso) {
         }
     }
 
-    if (!encontrado) { //verifica se algum aluno com o nome buscado não foi encontrado
+    if (!encontrado) { //Verifica se algum aluno com o nome buscado não foi encontrado
         printf("\nAluno não encontrado.\n");
     }
 }
