@@ -177,6 +177,7 @@ gcc src/*.c -Iinclude -o sistema
 
 21/10/2026 (V 2.67)
 - Resolvido bug de duplicidade de dados após exclusão
+- Resolvido bug de acesso ao boletim após edição das avaliações
 
 Próximos passos finais:
 - Rever a função e garantir a integridade ☑

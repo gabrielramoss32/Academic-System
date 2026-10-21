@@ -90,6 +90,13 @@ void definir_avaliacoes(int opcao_acesso) {
 
     printf("\nAvaliações cadastradas com sucesso.\n");
     av_cadastrada[opcao_acesso] = true; //A turma selecionada recebe que as avaliações foram cadastradas
+    
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        turmas[opcao_acesso].alunos[i].boletim_disponivel = false;
+        for (int j = 0; j < MAX_AVALIACOES; j++) {
+            turmas[opcao_acesso].alunos[i].notas[j] = 0;
+        }
+    }
 }
 
 void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
