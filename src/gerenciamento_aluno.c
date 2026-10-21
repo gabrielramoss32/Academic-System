@@ -201,7 +201,8 @@ void excluir_aluno (int opcao_acesso) {
                 printf("Quantidade de alunos: %d >>> %d\n", turmas[opcao_acesso].qtd_alunos, turmas[opcao_acesso].qtd_alunos - 1);
                 scanf(" %c", &confirm);
                 if (confirm == 'S' || confirm == 's') {
-                    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos - opcao - 1; i++) {
+                    int deslocamentos = turmas[opcao_acesso].qtd_alunos - opcao - 1;
+                    for (int i = 0; i < deslocamentos; i++) {
                         turmas[opcao_acesso].alunos[opcao] = turmas[opcao_acesso].alunos[opcao + 1];
                         opcao++; //Incrementa para deslocar os próximos alunos
                     }

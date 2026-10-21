@@ -1,7 +1,7 @@
 【C】【h】【a】【n】【g】【e】【l】【o】【g】【s】 
 
 → Documento do projeto responsável por listar todas as alterações e etapas do projeto, documentados com sua data, versão e alterações feitas.
-→ Versão atual: 2.65
+→ Versão atual: 2.63
 
 → Código de compilação do projeto:
 gcc src/*.c -Iinclude -o sistema
@@ -164,20 +164,23 @@ gcc src/*.c -Iinclude -o sistema
 - Removidos comentários em excesso do projeto, favorecendo um código mais limpo
 - Merge no main
 
-20/10/2026 (V 2.62) 
+20/10/2026 (V 2.63) 
 - Primeiro patch de correção de bugs
 - Removida a herança de um boletim após exclusão de um aluno
 - Removido bug de busca que impedia de localizar alunos buscando apenas o primeiro nome
 - Removidos "getchar" de escola e formação
 - Removida permanência de notas lançadas após edição das avaliações
 
-21/10/2026 (V 2.63)
+21/10/2026 (V 2.65)
 - Resolvido bug do aluno fantasma
 - Bugs apontados pelo chatgpt resolvidos
+
+21/10/2026 (V 2.67)
+- Resolvido bug de duplicidade de dados após exclusão
 
 Próximos passos finais:
 - Rever a função e garantir a integridade ☑
 - Tirar comentários excessivos do projeto ☑
-- Resolver os erros apontados pelo claude
-- Testar com múltiplas IA´s
+- Testar com múltiplas IA´s ☑
+- Resolver os erros apontados pelo claude ☑
 - Documentar o README final

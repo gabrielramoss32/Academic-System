@@ -121,7 +121,8 @@ void excluir_turma() {
                 printf("Quantidade de turmas: %d >>> %d\n", qtd_turmas, qtd_turmas-1);
                 scanf(" %c", &confirm);
                 if (confirm == 'S' || confirm == 's') {
-                    for (int i = 0; i < qtd_turmas - opcao - 1; i++) { //Desloca apenas a quantidade de turmas que tem para deslocar
+                    int deslocamentos = qtd_turmas - opcao - 1;
+                    for (int i = 0; i < deslocamentos; i++) { //Desloca apenas a quantidade de turmas que tem para deslocar
                         turmas[opcao] = turmas[opcao + 1]; 
                         av_cadastrada[opcao] = av_cadastrada[opcao + 1];
                         opcao++; //Incrementa para que a próxima turma possa ser deslocada para a posição desejada
