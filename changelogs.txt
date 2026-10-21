@@ -171,12 +171,13 @@ gcc src/*.c -Iinclude -o sistema
 - Removidos "getchar" de escola e formação
 - Removida permanência de notas lançadas após edição das avaliações
 
-Bugs encontrados:
-- "Aluno fantasma": após um cadastro de aluno, é cadastrado um aluno sem nome e matricula ao consultar pela listagem
-- Ver os erros apontados pelo claude
+21/10/2026 (V 2.63)
+- Resolvido bug do aluno fantasma
+- Bugs apontados pelo chatgpt resolvidos
 
 Próximos passos finais:
 - Rever a função e garantir a integridade ☑
 - Tirar comentários excessivos do projeto ☑
+- Resolver os erros apontados pelo claude
 - Testar com múltiplas IA´s
 - Documentar o README final

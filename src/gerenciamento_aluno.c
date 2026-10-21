@@ -81,7 +81,7 @@ void cadastro_alunos (int opcao_acesso) {
     } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //Repete se a matrícula não tiver sido validada
 
     printf("\n - Aluno nº %d/%d cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1, MAX_ALUNOS);
-    turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos++].boletim_disponivel = false; //Inicializa aquele aluno como sem boletim disponível
+    turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].boletim_disponivel = false; //Inicializa aquele aluno como sem boletim disponível
     turmas[opcao_acesso].qtd_alunos++; //Incrementação da quantidade de alunos registrados naquela turma
 }
 
