@@ -119,6 +119,12 @@ void editar_avaliacoes(int opcao_acesso, bool av_cadastrada[MAX_TURMAS]) {
                             printf("\nA média da turma deve ser maior que 0 e menor que 10.\n");
                         } else {
                             printf("\nMédia editada com sucesso.\n");
+                            for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+                                turmas[opcao_acesso].alunos[i].boletim_disponivel = false;
+                                for (int j = 0; j < MAX_AVALIACOES; j++) {
+                                    turmas[opcao_acesso].alunos[i].notas[j] = 0;
+                                }
+                            }
                         }
                     } while (turmas[opcao_acesso].media <= 0.0 || turmas[opcao_acesso].media >= 10.0);
                     break;
@@ -192,6 +198,12 @@ void editar_nota_avaliacao (int opcao_acesso) {
 
         } while (diferenca != 10.0);
     } while (opcao_edit < 0 || opcao_edit >= turmas[opcao_acesso].qtd_avaliacoes);
+    for (int i = 0; i < turmas[opcao_acesso].qtd_alunos; i++) {
+        turmas[opcao_acesso].alunos[i].boletim_disponivel = false;
+        for (int j = 0; j < MAX_AVALIACOES; j++) {
+            turmas[opcao_acesso].alunos[i].notas[j] = 0;
+        }
+    }
     printf("Nota da avaliação alterada.\n");
 }
 

@@ -81,6 +81,7 @@ void cadastro_alunos (int opcao_acesso) {
     } while (!validar_matricula(opcao_acesso, -1, turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos].matricula)); //Repete se a matrícula não tiver sido validada
 
     printf("\n - Aluno nº %d/%d cadastrado, selecione a próxima opção: \n", turmas[opcao_acesso].qtd_alunos + 1, MAX_ALUNOS);
+    turmas[opcao_acesso].alunos[turmas[opcao_acesso].qtd_alunos++].boletim_disponivel = false; //Inicializa aquele aluno como sem boletim disponível
     turmas[opcao_acesso].qtd_alunos++; //Incrementação da quantidade de alunos registrados naquela turma
 }
 
@@ -268,6 +269,7 @@ void busca_por_nome (int opcao_acesso) {
     printf("\nDigite o nome do aluno que deseja procurar: ");
     getchar();
     fgets(nome_buscado, sizeof(nome_buscado), stdin);
+    nome_buscado[strcspn(nome_buscado, "\n")] = '\0';
     for (int i = 0; i < strlen(nome_buscado); i++) {
         nome_buscado[i] = tolower(nome_buscado[i]); //Normaliza o nome buscado para ficar todo em minúsculo
     }

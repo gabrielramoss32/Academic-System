@@ -3,7 +3,7 @@
 #include "cadastro_turma.h"
 
 Professor professor1 = {
-    .cadastrado = false //professor global definido como sem cadastro e variável de professor declarada (pode ser alterado para fins de teste)
+    .cadastrado = true //professor global definido como sem cadastro e variável de professor declarada (pode ser alterado para fins de teste)
 };
 
 void cadastro_professor () {
@@ -28,11 +28,9 @@ void cadastro_professor () {
     fgets(professor1.nome, sizeof(professor1.nome), stdin);
 
     printf("Digite a sua formação: ");
-    getchar();
     fgets(professor1.formacao, sizeof(professor1.formacao), stdin);
 
     printf("Digite o nome da escola em que você é professor: ");
-    getchar();
     fgets(professor1.escola, sizeof(professor1.escola), stdin);
 
     printf("\nCadastro realizado! Seja bem-vindo %s", professor1.nome);

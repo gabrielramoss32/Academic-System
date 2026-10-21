@@ -88,7 +88,7 @@ void ver_boletim (int opcao_acesso) {
                     printf("└─────────────────────────────────────┘\n");
 
                 } else {
-                    printf("\nNão foi possível consultar o boletim, verifique se o aluno teve suas notas lançadas e se a turma teve suas avaliações cadastradas.\n");
+                    printf("\nNão foi possível consultar o boletim, verifique se o aluno teve suas notas lançadas e se a turma teve suas avaliações cadastradas ou editadas.\n");
                 }
 
             } else {

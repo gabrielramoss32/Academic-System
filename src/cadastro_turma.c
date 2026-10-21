@@ -27,7 +27,7 @@ void turma_cadastro (bool professor1_cadastrado) {
         printf("Digite a turma (A, B, C): ");
         scanf(" %c", &turmas[qtd_turmas].turma);
 
-        printf("Digite qual turno você ministra essa turma: ");
+        printf("Digite qual turno você ministra essa turma (Matutino, Vespertino, Noturno): ");
         scanf("%s", turmas[qtd_turmas].turno);
 
         printf("Digite qual matéria você ministra nessa turma: ");
