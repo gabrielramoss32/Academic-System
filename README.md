@@ -1,22 +1,47 @@
 # 📚 Sistema Acadêmico
 
-Aplicação de console em **C** para praticar estruturas, funções, vetores, validação de dados e organização de um programa em múltiplos arquivos.
+Projeto aplicado em **C** para praticar structs, funções, vetores, validação de dados e organização de um programa de forma modularizada, além do versionamento com Git e GitHub.
 
-O sistema simula o gerenciamento de turmas e alunos por um professor. Este projeto está em desenvolvimento; o histórico detalhado de alterações está em [changelogs.txt](changelogs.txt).
+O sistema simula o gerenciamento de turmas e alunos por um professor, permitindo o uso de múltiplas funções. Este projeto está finalizado e o histórico detalhado de alterações está em [changelogs.txt](changelogs.txt).
 
 ## 📄 Funcionalidades atuais
 
-- Cadastro de professor, com validação de ID e idade;
-- Gerenciamento de turmas: cadastro, edição, acesso e exclusão;
-- Gerenciamento de alunos por turma: cadastro, edição, listagem, busca e exclusão;
-- Validação de matrícula com seis dígitos e prevenção de matrículas duplicadas na mesma turma.
+- Cadastro de professor, com validação de ID, idade e preenchimento de dados;
+- Gerenciamento de turmas: cadastro, edição, acesso, exclusão e definição de avaliações;
+- Gerenciamento de alunos por turma: cadastro, edição, listagem, busca, exclusão;
+- Gerenciamento de notas dos alunos: lançamento de notas, edição, visualização de boletim e estatísticas da turma;
+- O sistema possui validações para os dados e regras de negócio implementadas, mas ainda existem limitações no tratamento de entradas inválidas.
 
 ## ❗ Limites atuais
 
-- Até 10 turmas e 35 alunos por turma;
-- Os dados ficam apenas na memória durante a execução: ao encerrar o programa, eles não são salvos;
-- As opções de notas, boletim e estatísticas já aparecem no menu, mas ainda não foram implementadas;
-- Falta de tratamento de erros para entradas inválidas
+- Os dados ficam apenas na memória durante a execução, ao encerrar o programa, eles não são salvos;
+- Falta de tratamento de erros para entradas inválidas, o que quebra o código se for executado com entradas inválidas.
+- Valores decimais nas avaliações podem, em casos raros, ser rejeitados por arredondamento, e um aluno com nota exatamente igual à média pode ser reprovado;
+- Alterar o valor das avaliações, a média da turma ou redefinir as avaliações zera as notas já lançadas.
+
+## 📐 Regras
+
+| Item | Regra |
+| :--- | :--- |
+| **Quantidade** | Até 10 turmas, 35 alunos por turma e 5 avaliações por turma |
+| **Professor** | ID com 4 dígitos (1000 a 9999) e idade mínima de 21 anos |
+| **Turma** | Série de 1 a 9; turno com **uma única palavra** (Matutino, Vespertino ou Noturno), até 14 caracteres; matéria com até 39 caracteres |
+| **Aluno** | Matrícula com 6 dígitos (100000 a 999999) e única dentro da turma; nome com até 79 caracteres |
+| **Avaliações** | Cada valor maior que 0 e até 10; a soma de todas deve ser exatamente 10; nome com até 34 caracteres |
+| **Média da turma** | Maior que 0 e menor que 10 |
+| **Notas** | De 0 até o valor da avaliação correspondente |
+| **Aprovação** | O aluno é aprovado quando a soma das notas é maior ou igual à média da turma |
+| **Zerar notas** | Alterar o **valor** de uma avaliação, a **média da turma** ou **redefinir** as avaliações zera as notas já lançadas da turma, e é preciso lançá-las novamente. Alterar só o **nome** de uma avaliação mantém as notas |
+| **Encerramento** | Ao sair do menu de turmas, o programa é encerrado e os dados são perdidos |
+
+## 🖋️ Conceitos praticados
+
+- Structs e vetores em C;
+- Modularização por arquivos .c e .h;
+- Operações CRUD para turmas e alunos;
+- Validação de dados e regras de negócio;
+- Manipulação e ordenação de dados;
+- Git, branches, commits e histórico de alterações.
 
 ## 💻 Requisitos
 
@@ -61,7 +86,7 @@ Se você nunca programou em C ou ainda não possui um compilador, siga estes pas
    ```
 
    Se aparecer uma versão do GCC, o compilador está pronto.
-5. Obtenha o projeto conforme a seção [Obter o projeto](#obter-o-projeto). Como o Git foi instalado no passo anterior, a opção recomendada é:
+5. Obtenha o projeto conforme a seção [Como obter o projeto](#como-obter-o-projeto). Como o Git foi instalado no passo anterior, a opção recomendada é:
 
    ```bash
    git clone https://github.com/gabrielramoss32/Academic-System.git
@@ -74,6 +99,7 @@ Se você nunca programou em C ou ainda não possui um compilador, siga estes pas
    gcc src/*.c -Iinclude -o sistema
    ./sistema.exe
    ```
+Siga as instruções apresentadas pelo programa.
 
 ## ⏯️ Compilação e execução com MinGW-w64 já instalado
 
@@ -89,20 +115,39 @@ O comando gera o executável `sistema.exe`.
 .\sistema.exe
 ```
 
-Siga as opções apresentadas no terminal. Para explorar o gerenciamento de alunos, cadastre ou acesse uma turma e selecione a opção correspondente no menu.
+Após isso, o projeto irá iniciar, siga as opções apresentadas no terminal. Para explorar o gerenciamento de alunos, cadastre ou acesse uma turma e selecione a opção correspondente no menu.
 
 ## 🗂️ Estrutura
 
 ```text
 Academic-System/
-├── include/             # Arquivos de cabeçalho e structs do sistema
-├── src/                 # Implementação dos menus e funcionalidades
-├── changelogs.txt       # Histórico autoritativo do projeto
-└── README.md            # Documentação geral do projeto
+├── include/                         # Cabeçalhos (.h): structs, constantes e protótipos das funções
+│   ├── cadastro_turma.h             # Struct Turma, limites MAX_TURMAS e MAX_ALUNOS, variáveis globais das turmas
+│   ├── gerenciamento_aluno.h        # Struct Aluno, limite MAX_AVALIACOES e funções de alunos
+│   ├── gerenciamento_avaliacoes.h   # Funções de avaliações e o vetor av_cadastrada
+│   ├── gerenciamento_notas.h        # Struct Classificacao e funções de notas, boletim e estatísticas
+│   ├── gerenciamento_turma.h        # Funções de acesso, edição e exclusão de turmas
+│   ├── menu.h                       # Função do menu inicial
+│   └── professor_cadastro.h         # Struct Professor e função de cadastro do professor
+├── src/                             # Implementação (.c)
+│   ├── main.c                       # Ponto de entrada do programa
+│   ├── menu.c                       # Menu inicial
+│   ├── professor_cadastro.c         # Cadastro do professor
+│   ├── cadastro_turma.c             # Cadastro de turmas e menu de turmas
+│   ├── gerenciamento_turma.c        # Acesso, edição e exclusão de turmas
+│   ├── gerenciamento_aluno.c        # Menu e gerenciamento de alunos
+│   ├── gerenciamento_avaliacoes.c   # Definição, edição e listagem das avaliações
+│   └── gerenciamento_notas.c        # Lançamento de notas, boletim e estatísticas
+├── .gitignore                       # Ignora build, sistema.exe e .vscode
+├── changelogs.txt                   # Histórico oficial de versões e alterações
+└── README.md                        # Documentação geral do projeto
 ```
 
-## 📆 Estado do projeto
+## 📆 Possíveis melhorias
 
-A versão atual foi compilada e testada no Windows com **GCC 15.2.0 (MinGW-W64)**. O fluxo de cadastro de turma, cadastro/listagem de aluno e busca por nome foi executado com sucesso durante essa verificação.
+A versão atual foi compilada e testada no Windows com **GCC 15.2.0 (MinGW-W64)**. Peço que ao encontrar quaisquer erros indesejados no projeto, entre em contato com o proprietário para correção.
 
-Próximos passos incluem finalizar e refatorar a busca de alunos, implementar o gerenciamento de notas e adicionar persistência de dados.
+- Futuras melhorias:
+1. Integração com ponteiros e memória dinâmica;
+2. Tratamento adequado para entradas inválidas;
+3. Implementar persistência dos dados por meio de arquivos ou de um banco de dados SQL.
